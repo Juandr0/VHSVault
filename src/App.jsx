@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import HomePageView from './Views/HomePageView';
+import MovieInformationView from './Views/MovieInformationView';
+import OrderConfirmationView from './Views/OrderConfirmationView';
+import ShoppingCartView from './Views/ShoppingCartView';
+import Navbar from './Components/Navbar';
+import React, { useState } from 'react';
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div>Webapp</div>
+    <div>
+      <Navbar/>
+      <HomePageView/>
+    </div>
+   
   )
-}
+};
 
 export default App
