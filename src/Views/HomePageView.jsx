@@ -1,18 +1,31 @@
-//Api key:d9dd561a
-//Api webpage default URL http://www.omdbapi.com/
-
-//Api request URL: http://www.omdbapi.com/?apikey=d9dd561a&
-//Api poster request URL: http://img.omdbapi.com/?apikey=d9dd561a&
-
-//Exempelsökning: http://www.omdbapi.com/?apikey=d9dd561a&t=die+hard
-
+import Movie from '../Model/Movie';
+import apiFetcher from '../Components/apiFetcher';
+import { useEffect, useState } from 'react';
 
 const HomePageView = () => {
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
+  
+    useEffect(() => {
+        const fetchMoviesData = async () => {
+            const moviesData = await apiFetcher();
+            setMovies(moviesData.results);
+            setLoading(false);
+        };
+        fetchMoviesData();
+    }, []);
 
-    return <div>
-        HomePage
-    </div>;
-}
-
+    if (loading) {
+        return <div>Loading..</div>
+    } else {
+        return (
+            <div className='home_movieGridContainer'>
+                {movies.map((movie, index) => (
+                    <Movie key={index} props={movie} />
+                ))}
+            </div>
+        );
+    }
+};
 
 export default HomePageView;
