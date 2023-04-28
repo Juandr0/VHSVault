@@ -1,0 +1,21 @@
+
+.movieContainer {
+    margin: 5px;
+    width: 200px;
+    flex-grow: 1;
+}
+
+.movieContainer h3 {
+    text-align: center;
+}
+
+.movieContainer img {
+    width: 100%;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 5px;
+}
+

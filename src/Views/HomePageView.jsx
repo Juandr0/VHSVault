@@ -1,6 +1,7 @@
 import Movie from '../Model/Movie';
 import apiFetcher from '../Components/apiFetcher';
 import { useEffect, useState } from 'react';
+import './CSS/HomePageView.css';
 
 const HomePageView = () => {
     const [loading, setLoading] = useState(true);

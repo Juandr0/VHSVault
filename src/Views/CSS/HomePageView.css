@@ -1,0 +1,13 @@
+body {
+    max-width: 960px;
+    margin: 0px auto;
+}
+
+
+.home_movieGridContainer {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
