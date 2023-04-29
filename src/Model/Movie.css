@@ -1,21 +1,55 @@
 
 .movieContainer {
-    margin: 5px;
+    margin: 5px 10px;
     width: 200px;
     flex-grow: 1;
 }
 
-.movieContainer h3 {
-    text-align: center;
+.movieContainer h4 {
+    margin-bottom: 5px;
 }
+
 
 .movieContainer img {
     width: 100%;
+    border-radius: 6px;
+}
+
+
+.addButton {
+    display: flex;
+    justify-content: end;
+}
+
+
+.addButton button{
+    position: relative;
+    top: -30px;
+    right: 0;
+    border: 1px solid black;
+    border-radius: 50px;
+    box-sizing: content-box;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.addButton p {
+    position: relative;
+    top: -45px;
+    color: white;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.movieInfoContainer {
+    display: flex;
+    justify-content: space-between ;
+    position: relative;
+    top: -40px;
 }
 
 .price {
-    display: flex;
-    justify-content: space-between;
-    margin: 0px 5px;
+    color: red;
 }
+
 
