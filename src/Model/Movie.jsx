@@ -61,12 +61,15 @@ const Movie = ({props}) => {
     const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
     return (
         <div className="movieContainer">
-            
             <img src={posterUrl} alt={'The cover of: ' + props.original_title}/>
-            <div className='price'> 
-                <p>{finalPrice}:-</p>
-                <button>+</button>
+            <div className='addButton'> 
+                <button>+ Add to cart</button>
             </div>
+            <div className='movieInfoContainer'>
+                <p>{props.original_title}</p>
+                <p className='price'>{finalPrice}:-</p>
+            </div>
+         
          
         </div>
     )
