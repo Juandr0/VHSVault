@@ -12,7 +12,7 @@ const MovieCard = ({ title, price, image }) => {
     );
 };
 
-const ConfirmPage = ({ movies }) => {
+const OrderConfirmationView = ({ movies }) => {
     const total = movies.reduce((acc, curr) => acc + curr.price, 0);
     const articleCount = movies.length;
 
