@@ -22,7 +22,7 @@ const HomePageView = () => {
         return (
             <div className='home_movieGridContainer'>
                 {movies.map((movie, index) => (
-                    <Movie key={index} props={movie} />
+                    <Movie key={index} props={movie} withButton={true} withDescription={false}/>
                 ))}
             </div>
         );

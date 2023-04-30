@@ -1,11 +1,12 @@
 import './Movie.css';
 import React from 'react';
 
-const Movie = ({props}) => {
-    const moviePriceMakerAlgoritm =  (props.vote_average * 7) + (props.popularity/2);
+const Movie = ({ props, withButton, withDescription }) => {
+
+    const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
 
-    switch (true){
+    switch (true) {
         //Low price
         case (moviePriceMakerAlgoritm <= 49): {
             finalPrice = 49;
@@ -21,14 +22,14 @@ const Movie = ({props}) => {
         //medium price
         case (moviePriceMakerAlgoritm <= 99):
             finalPrice = 99;
-        break;
+            break;
 
         //medium/high price
         case (moviePriceMakerAlgoritm <= 129):
             finalPrice = 129;
-        break;
-        
-        
+            break;
+
+
         //high price
         case (moviePriceMakerAlgoritm <= 149):
             finalPrice = 149;
@@ -36,41 +37,59 @@ const Movie = ({props}) => {
 
         //high/premium price
         case (moviePriceMakerAlgoritm <= 179):
-        finalPrice = 179;
-        break;
+            finalPrice = 179;
+            break;
 
         //Premium price
         case (moviePriceMakerAlgoritm <= 199):
             finalPrice = 199;
             break;
 
-         //Premium/platinum price
-         case (moviePriceMakerAlgoritm <= 129):
+        //Premium/platinum price
+        case (moviePriceMakerAlgoritm <= 129):
             finalPrice = 129;
             break;
 
         //Platinum price
-        default : 
+        default:
             finalPrice = 249;
             break;
-        
-
     }
 
     const posterPath = props.poster_path;
     const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
+
+
+
+
     return (
+
         <div className="movieContainer">
-            <img src={posterUrl} alt={'The cover of: ' + props.original_title}/>
-            <div className='addButton'> 
-                <button>+ Add to cart</button>
-            </div>
+            <img src={posterUrl} alt={'The cover of: ' + props.original_title} />
+
+            {
+                withButton ? (
+                    <div className='addButton'>
+                        <button>+ Add to cart</button>
+                    </div>
+                ) : null
+            }
             <div className='movieInfoContainer'>
-                <p>{props.original_title}</p>
+                <p className='title'>{props.original_title}</p>
                 <p className='price'>{finalPrice}:-</p>
             </div>
-         
-         
+            {
+                withDescription ? (
+                    <div>
+                        <p>{props.overview}</p>
+                        <p>Original language: {props.original_language}</p>
+                        <p>Average rating: {props.vote_average}</p>
+                    </div>
+
+                ) : null
+
+            }
+
         </div>
     )
 }

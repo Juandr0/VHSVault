@@ -5,14 +5,14 @@
     flex-grow: 1;
 }
 
-.movieContainer h4 {
-    margin-bottom: 5px;
-}
-
 
 .movieContainer img {
     width: 100%;
     border-radius: 6px;
+}
+
+.movieContainer img:hover {
+    cursor: pointer;
 }
 
 
@@ -45,7 +45,8 @@
     display: flex;
     justify-content: space-between ;
     position: relative;
-    top: -40px;
+    top: -20px;
+    
 }
 
 .price {
