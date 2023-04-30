@@ -1,6 +1,7 @@
 import './Movie.css';
 import React from 'react';
 
+
 const Movie = ({ props, withButton, withDescription }) => {
 
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
@@ -60,12 +61,17 @@ const Movie = ({ props, withButton, withDescription }) => {
     const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
 
 
-
+    const imageClick = () => {
+        //Lägg till klass / ta bort class från css så att
+        //filmen inte är clickable i movie-info screen
+        console.log(props.original_title + '  clicked');
+        
+    }
 
     return (
 
         <div className="movieContainer">
-            <img src={posterUrl} alt={'The cover of: ' + props.original_title} />
+            <img onClick={imageClick} src={posterUrl} alt={'The cover of: ' + props.original_title} />
 
             {
                 withButton ? (
