@@ -1,139 +1,193 @@
+body {
+  max-width: 960px;
+  margin: 0px auto;
+}
+
+/* default styles for desktop */
 .shopping-cart-view {
-    margin-top: 100px;
-    display: flex;
+  margin-top: 100px;
+  display: flex;
+}
+
+.movie-list {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  max-width: 350px;
+  margin: 10px auto 0;
+}
+
+.movie-card img {
+  height: 50%; 
+  object-fit: cover; 
+}
+
+.movie-card h3 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.movie-card p {
+  margin-top: 0;
+  text-align: center;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+}
+
+.trash-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.summary {
+  flex: 0 0 300px;
+  padding: 60px;
+}
+
+.confirmation-button {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  max-width: 200px;
+}
+
+.confirmation-button:hover {
+  background-color: green;
+  color: white;
+}
+
+.clear-cart-button {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: left;
+  max-width: 200px;
+}
+
+.clear-cart-button:hover {
+  background-color: red;
+  color: white;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 250px;
+  margin: 10px;
+}
+
+.movie-cover {
+  width: 100%;
+  height: auto;
+}
+
+.movie-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.trash-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  width: 80%;
+}
+
+.checkout-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+
+/* styles for mobile devices */
+@media screen and (max-width: 768px) {
+  .shopping-cart-view {
+    flex-direction: column;
+  }
+  
+  .summary {
+    flex: 1;
   }
   
   .movie-list {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
+    margin-top: 50px;
   }
-  
-  .movie-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid gray;
-    margin-bottom: 10px;
-    position: relative;
-    width: 200px;
-    height: 200px;
-    max-width: 350px;
-    margin: 10px auto 0;
-    
-  }
-  
-  .movie-card img {
-    height: 50%; 
-    object-fit: cover; 
-  }
-  
-  .movie-card h3 {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    margin-bottom: 0;
-    text-align: center;
-  }
-  
-  .movie-card p {
-    margin-top: 0;
-    text-align: center;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
-  }
-  
-  
-  .trash-icon {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    cursor: pointer;
-  }
-  
-  .summary {
-    flex: 0 0 300px;
-    padding: 60px;
-    
-  }
-  
-  .confirmation-button {
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .confirmation-button:hover {
-    background-color: green;
-    color: white;
-  }
-  
-  .clear-cart-button {
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    text-align: left;
-  }
-  
-  .clear-cart-button:hover {
-    background-color: red;
-    color: white;
-  }
-  
-  
+}
+
+@media only screen and (min-width: 768px) {
   .shopping-cart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .cart-items {
-    display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
+    align-items: flex-start;
   }
-  
-  .movie-card {
-    width: 250px;
-    margin: 10px;
+
+  .cart-items {
+    flex: 2;
   }
-  
-  .movie-cover {
-    width: 100%;
-    height: auto;
-  }
-  
-  .movie-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .trash-icon {
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
+
   .summary {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-    width: 80%;
+    flex: 1;
   }
-  
-  .checkout-summary {
-    display: flex;
-    flex-direction: column
-  
-  
-  }
+}
+
+
