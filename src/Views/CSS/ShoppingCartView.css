@@ -1,0 +1,139 @@
+.shopping-cart-view {
+    margin-top: 100px;
+    display: flex;
+  }
+  
+  .movie-list {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    max-width: 350px;
+    margin: 10px auto 0;
+    
+  }
+  
+  .movie-card img {
+    height: 50%; 
+    object-fit: cover; 
+  }
+  
+  .movie-card h3 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  
+  .movie-card p {
+    margin-top: 0;
+    text-align: center;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+  }
+  
+  
+  .trash-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+  
+  .summary {
+    flex: 0 0 300px;
+    padding: 60px;
+    
+  }
+  
+  .confirmation-button {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .confirmation-button:hover {
+    background-color: green;
+    color: white;
+  }
+  
+  .clear-cart-button {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: left;
+  }
+  
+  .clear-cart-button:hover {
+    background-color: red;
+    color: white;
+  }
+  
+  
+  .shopping-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cart-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .movie-card {
+    width: 250px;
+    margin: 10px;
+  }
+  
+  .movie-cover {
+    width: 100%;
+    height: auto;
+  }
+  
+  .movie-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .trash-icon {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .summary {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    width: 80%;
+  }
+  
+  .checkout-summary {
+    display: flex;
+    flex-direction: column
+  
+  
+  }
