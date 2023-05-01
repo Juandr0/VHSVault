@@ -1,20 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { Route, HashRouter as Router } from 'react-router-dom'
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
-import { rootReducer } from './features/rootreducer'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
+import { Route, HashRouter as Router } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import rootReducer from './features/rootreducer';
 
-//Root reducer
-const store = configureStore(
-  { reducer: rootReducer }
-);
-
-
-
-
+// Create the Redux store using the root reducer
+const store = configureStore({
+  reducer: rootReducer,
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -24,4 +20,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </Provider>
     </Router>
   </React.StrictMode>,
-)
+);

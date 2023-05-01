@@ -1,11 +1,8 @@
-import { combineReducers } from "redux";
-import { reducer as myExampleState} from "./myExampleState";
-  
+import { combineReducers } from 'redux';
+import cartReducer from '../features/cartSlice'
 
 const rootReducer = combineReducers({
-    myExampleState : myExampleState
+  cart: cartReducer
+});
 
-})
-
-
-export {rootReducer};
+export default rootReducer;

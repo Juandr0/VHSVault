@@ -48,9 +48,9 @@
 .movie-card p {
   margin-top: 0;
   text-align: center;
-  overflow: hidden; /* make sure the text doesn't overflow outside the container */
-  text-overflow: ellipsis; /* add ellipsis to indicate there is more text that's not visible */
-  white-space: nowrap; /* prevent the text from wrapping to the next line */
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
 }
 
 
@@ -67,7 +67,7 @@
   
 }
 
-.confirm-button {
+.confirmation-button {
   background-color: white;
   color: black;
   padding: 10px;
@@ -77,16 +77,72 @@
   margin-top: 10px;
 }
 
-.confirm-button:hover {
+.confirmation-button:hover {
   background-color: green;
   color: white;
 }
 
+.clear-cart-button {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.clear-cart-button:hover {
+  background-color: red;
+  color: white;
+}
 
 
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 250px;
+  margin: 10px;
+}
+
+.movie-cover {
+  width: 100%;
+  height: auto;
+}
+
+.movie-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.trash-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  width: 80%;
+}
+
+.checkout-summary {
+  display: flex;
+  flex-direction: column
 
 
-
-
-
-
+}
