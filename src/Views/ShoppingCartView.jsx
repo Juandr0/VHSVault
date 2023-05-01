@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlice";
+import { setOrderDetails } from "../features/orderSlice";
+import './CSS/ShoppingCartView.css';
 
 const MovieCard = ({ movie, index }) => {
   const dispatch = useDispatch();
@@ -25,6 +27,13 @@ const ShoppingCartView = () => {
   const total = cartItems.reduce((acc, curr) => acc + curr.price, 0);
   const dispatch = useDispatch();
   const clearCartHandler = () => dispatch(clearCart());
+  const placeOrderHandler = () => {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const address = document.getElementById('address').value;
+    const phone = document.getElementById('phone').value;
+    dispatch(setOrderDetails({ name, email, address, phone, items: cartItems, total }));
+  };
 
   return (
     <div className="shopping-cart">
@@ -50,8 +59,8 @@ const ShoppingCartView = () => {
               <label htmlFor="phone">Phone Number</label>
               <input type="tel" id="phone" required />
             </form>
-            <Link to="/confirmation" className="confirmation-button">
-              Place Order
+            <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
+            Place Order
             </Link>
             <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
           </div>
@@ -62,6 +71,7 @@ const ShoppingCartView = () => {
 }
 
 export default ShoppingCartView;
+
 
 
 
