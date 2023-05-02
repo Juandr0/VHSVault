@@ -55,7 +55,7 @@ const HomePageView = () => {
                   <Movie
                     key={index}
                     props={movie}
-                    withButton={true}
+                    withAddButton={true}
                     withDescription={false}
                     navigationClick={() => navigationClick(movie)}
                     posterWidth={posterWidth}
