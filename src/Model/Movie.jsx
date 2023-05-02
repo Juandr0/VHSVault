@@ -1,9 +1,22 @@
 import './Movie.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { addToCart } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Movie = ({ props, withButton, withDescription, navigationClick, posterWidth}) => {
+
+    const dispatch = useDispatch();
+  
+    // Add this function to handle the addToCart action
+    const addToCartHandler = () => {
+      dispatch(addToCart({
+        title: props.title,
+        price: finalPrice,
+        imageURL: posterUrl
+      }));
+    };
 
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
@@ -80,7 +93,7 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
             {
                 withButton ? (
                     <div className='addButton'>
-                        <button>+ Add to cart</button>
+                        <button onClick={addToCartHandler}>+ Add to cart</button>
                     </div>
                 ) : null
             }

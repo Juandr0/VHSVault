@@ -4,31 +4,15 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
       items: [
-        {
-          title: 'Snatch',
-          price: 9.99,
-          image: 'https://picsum.photos/id/237/200/300'
-        },
-        {
-          title: 'Fight Club',
-          price: 12.99,
-          image: 'https://picsum.photos/id/238/200/300'
-        },
-        {
-          title: 'Seven',
-          price: 14.99,
-          image: 'https://picsum.photos/id/239/200/300'
-        }
+
       ]
     },
   reducers: {
     addToCart: (state, action) => {
-      const found = state.items.find(
-        (cartItem) => cartItem.product.title === action.payload.title
-      );
+      const found = state.items.find((cartItem) => cartItem.title === action.payload.title);
       if (found) {
         const newState = state.items.map((cartItem) => {
-          if (cartItem.product.title === action.payload.title) {
+          if (cartItem.title === action.payload.title) {
             return { ...cartItem, count: cartItem.count + 1 };
           } else {
             return cartItem;
@@ -36,7 +20,7 @@ const cartSlice = createSlice({
         });
         state.items = newState;
       } else {
-        state.items.push({ product: action.payload, count: 1 });
+        state.items.push({ ...action.payload, count: 1 });
       }
     },
     increaseAmount: (state, action) => {
