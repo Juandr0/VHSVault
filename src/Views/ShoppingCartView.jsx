@@ -10,7 +10,7 @@ const MovieCard = ({ movie, index }) => {
   
   return (
     <div className="movie-card" key={`${movie.title}-${index}`}>
-      <img src={movie.image} alt={movie.title} className="movie-cover" />
+      <img src={movie.imageURL} alt={movie.title} className="movie-cover" />
       <div className="movie-info">
         <h3 className="movie-title">{movie.title}</h3>
         <p className="movie-price">${movie.price}</p>
