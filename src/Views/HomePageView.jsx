@@ -8,6 +8,7 @@ const HomePageView = () => {
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
+    const posterWidth = 200
 
 
     const navigationClick = (movie) => {
@@ -40,8 +41,9 @@ const HomePageView = () => {
                             withButton={true} 
                             withDescription={false} 
                             navigationClick={() => navigationClick(movie)}
-                            posterWidth={200}
-                            />
+                            posterWidth={posterWidth}
+                            runPriceAlgoritm={true}
+                        />
                 ))}
             </div>
 

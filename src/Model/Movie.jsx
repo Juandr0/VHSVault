@@ -1,21 +1,26 @@
 import './Movie.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { addToCart } from "../features/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
-const Movie = ({ props, withButton, withDescription, navigationClick, posterWidth}) => {
+const Movie = ({ props, 
+                 withButton, 
+                 withDescription,   
+                 navigationClick, 
+                 posterWidth, 
+                 runPriceAlgoritm 
+                }) => {
 
     const dispatch = useDispatch();
-  
+
     // Add this function to handle the addToCart action
     const addToCartHandler = () => {
-      dispatch(addToCart({
-        title: props.title,
-        price: finalPrice,
-        imageURL: posterUrl
-      }));
+        dispatch(addToCart({
+            title: props.title,
+            price: finalPrice,
+            poster_path: posterUrl
+        }));
     };
 
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
@@ -25,7 +30,7 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
     const imageSizeInPixels = posterWidth + 'px';
 
 
-    switch (true) {
+    switch (runPriceAlgoritm) {
         //Low price
         case (moviePriceMakerAlgoritm <= 49): {
             finalPrice = 49;
@@ -81,16 +86,16 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
 
     return (
 
-            //Sets max-width or regular width depending on the image size
-            //so that flex box does not break due to a fixed width on a larger image.
-            
-            <div className="movieContainer" style={{
+        //Sets max-width or regular width depending on the image size
+        //so that flex box does not break due to a fixed width on a larger image.
+
+        <div className="movieContainer" style={{
             width: largeImage ? '' : imageSizeInPixels,
             maxWidth: largeImage ? imageSizeInPixels : 'none'
-            }}>
-
-            <img onClick={navigationClick} src={posterUrl} alt={'The cover of: ' + props.original_title} />
+        }}>
+            <img onClick={navigationClick} src={posterUrl} alt={'The cover of: ' + props.title} />
             {
+                //Displays button depending on if argument withButton is true
                 withButton ? (
                     <div className='addButton'>
                         <button onClick={addToCartHandler}>+ Add to cart</button>
@@ -98,10 +103,18 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
                 ) : null
             }
             <div className='movieInfoContainer'>
-                <p className='title'>{props.original_title}</p>
-                <p className='price'>{finalPrice}:-</p>
+                <p className='title'>{props.title}</p>
+                {
+                    //Runs price algoritm if true and displays result, otherwise
+                    //it displays the value of props.price
+                    runPriceAlgoritm ? (
+                        <p className='price'>{finalPrice}:-</p>
+                    ) : <p className='price'>{props.price}:-</p>
+                }
             </div>
             {
+                    //If withDescription argument is true the paragraphs beneath will
+                    //be displayed.
                 withDescription ? (
                     <div>
                         <p>{props.overview}</p>
@@ -110,11 +123,8 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
                     </div>
 
                 ) : null
-
             }
-
         </div>
-
     )
 }
 
