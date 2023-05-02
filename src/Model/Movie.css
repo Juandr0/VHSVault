@@ -2,14 +2,11 @@
 .movieContainer {
     margin: 5px 10px;
     flex-grow: 1;
-}
-
-.small-image {
-    width: 150px;
+    flex-shrink: 1;
 }
 
 .large-image {
-    width: 500px;
+    max-width: 500px;
 }
 
 .movieContainer img {

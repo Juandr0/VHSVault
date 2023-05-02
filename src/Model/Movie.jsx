@@ -8,6 +8,10 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
 
+    const largeImage = posterWidth > 200;
+    const imageSizeInPixels = posterWidth + 'px';
+
+
     switch (true) {
         //Low price
         case (moviePriceMakerAlgoritm <= 49): {
@@ -64,7 +68,14 @@ const Movie = ({ props, withButton, withDescription, navigationClick, posterWidt
 
     return (
 
-        <div className="movieContainer" style={{width : posterWidth}}>
+            //Sets max-width or regular width depending on the image size
+            //so that flex box does not break due to a fixed width on a larger image.
+            
+            <div className="movieContainer" style={{
+            width: largeImage ? '' : imageSizeInPixels,
+            maxWidth: largeImage ? imageSizeInPixels : 'none'
+            }}>
+
             <img onClick={navigationClick} src={posterUrl} alt={'The cover of: ' + props.original_title} />
             {
                 withButton ? (

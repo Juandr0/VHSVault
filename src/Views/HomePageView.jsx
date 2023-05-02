@@ -40,7 +40,7 @@ const HomePageView = () => {
                             withButton={true} 
                             withDescription={false} 
                             navigationClick={() => navigationClick(movie)}
-                            posterWidth={'150px'}
+                            posterWidth={200}
                             />
                 ))}
             </div>
