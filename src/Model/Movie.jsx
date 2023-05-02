@@ -1,8 +1,9 @@
 import './Movie.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
-const Movie = ({ props, withButton, withDescription }) => {
+const Movie = ({ props, withButton, withDescription, navigationClick, posterWidth}) => {
 
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
@@ -61,18 +62,10 @@ const Movie = ({ props, withButton, withDescription }) => {
     const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
 
 
-    const imageClick = () => {
-        //Lägg till klass / ta bort class från css så att
-        //filmen inte är clickable i movie-info screen
-        console.log(props.original_title + '  clicked');
-        
-    }
-
     return (
 
-        <div className="movieContainer">
-            <img onClick={imageClick} src={posterUrl} alt={'The cover of: ' + props.original_title} />
-
+        <div className="movieContainer" style={{width : posterWidth}}>
+            <img onClick={navigationClick} src={posterUrl} alt={'The cover of: ' + props.original_title} />
             {
                 withButton ? (
                     <div className='addButton'>
@@ -97,6 +90,7 @@ const Movie = ({ props, withButton, withDescription }) => {
             }
 
         </div>
+
     )
 }
 
