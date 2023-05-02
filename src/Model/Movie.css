@@ -19,13 +19,13 @@
 }
 
 
-.addButton {
+.addButton, .removeButton{
     display: flex;
     justify-content: end;
 }
 
 
-.addButton button{
+.addButton button, .removeButton button{
     position: relative;
     top: -30px;
     right: 0;
@@ -36,12 +36,9 @@
     margin-right: 5px;
 }
 
-.addButton p {
-    position: relative;
-    top: -45px;
+.removeButton button{
+    background-color: red;
     color: white;
-    border-radius: 30px;
-    padding: 10px;
 }
 
 .movieInfoContainer {
