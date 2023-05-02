@@ -1,10 +1,16 @@
 
 .movieContainer {
     margin: 5px 10px;
-    width: 200px;
     flex-grow: 1;
 }
 
+.small-image {
+    width: 150px;
+}
+
+.large-image {
+    width: 500px;
+}
 
 .movieContainer img {
     width: 100%;

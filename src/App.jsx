@@ -20,7 +20,7 @@ function App() {
           }
         />
 
-        <Route  path="/movie/id" element={
+        <Route  path="/movie/:id" element={
           //Skapa funktionalitet för och lägg till filmens ID så att den syns i länken
             <MovieInformationView />
           } />
