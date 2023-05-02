@@ -1,15 +1,16 @@
 import './Movie.css';
 import React from 'react';
-import { addToCart } from "../features/cartSlice";
+import { addToCart, removeFromCart} from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 
 
 const Movie = ({ props, 
-                 withButton, 
+                 withAddButton, 
+                 withRemoveButton,
                  withDescription,   
                  navigationClick, 
                  posterWidth, 
-                 runPriceAlgoritm 
+                 runPriceAlgoritm
                 }) => {
 
     const dispatch = useDispatch();
@@ -22,6 +23,10 @@ const Movie = ({ props,
             poster_path: posterUrl
         }));
     };
+
+    const removeFromCartHandler = () => {
+        dispatch(removeFromCart(props.title));
+    }
 
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
@@ -96,12 +101,21 @@ const Movie = ({ props,
             <img onClick={navigationClick} src={posterUrl} alt={'The cover of: ' + props.title} />
             {
                 //Displays button depending on if argument withButton is true
-                withButton ? (
+                withAddButton ? (
                     <div className='addButton'>
                         <button onClick={addToCartHandler}>+ Add to cart</button>
                     </div>
                 ) : null
             }
+                 {
+                //Displays button depending on if argument withButton is true
+                withRemoveButton ? (
+                    <div className='removeButton'>
+                        <button onClick={removeFromCartHandler}>- Remove</button>
+                    </div>
+                ) : null
+            }
+
             <div className='movieInfoContainer'>
                 <p className='title'>{props.title}</p>
                 {

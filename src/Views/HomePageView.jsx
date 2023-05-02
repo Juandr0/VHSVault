@@ -26,7 +26,7 @@ const HomePageView = () => {
         fetchMoviesData();
     }, []);
 
- 
+   
 
     if (loading) {
         return <div>Loading..</div>
@@ -38,7 +38,7 @@ const HomePageView = () => {
                         <Movie 
                             key={index} 
                             props={movie} 
-                            withButton={true} 
+                            withAddButton={true} 
                             withDescription={false} 
                             navigationClick={() => navigationClick(movie)}
                             posterWidth={posterWidth}

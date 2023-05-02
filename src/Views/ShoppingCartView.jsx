@@ -25,7 +25,7 @@ const MovieCard = ({ movie, index }) => {
   return (
     <Movie 
       props = {movie}
-      withButton={false}
+      withRemoveButton={true}
       withDescription={false}
       posterWidth={posterWidth}
       runPriceAlgoritm={false}
