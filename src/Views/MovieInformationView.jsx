@@ -11,9 +11,10 @@ const MovieInformationView = () => {
         <div>
             <Movie 
                 props = {movie}
-                withButton={true}
+                withAddButton={true}
                 withDescription={true}
                 posterWidth={posterWidth}
+                runPriceAlgoritm={true}
             />
         </div>
     )
