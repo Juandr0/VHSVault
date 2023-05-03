@@ -1,13 +1,12 @@
 import Movie from '../Model/Movie';
-import apiFetcher from '../Components/apiFetcher';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import './CSS/HomePageView.css';
 import { useNavigate } from 'react-router-dom';
+import apiFetcher from '../Components/apiFetcher';
 
 const HomePageView = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const posterWidth = 200;
@@ -17,55 +16,53 @@ const HomePageView = () => {
     navigate(`/movie/${id}`, { state: { movie } });
   };
 
+  const fetchMoviesData = async (searchTerm = '') => {
+    setLoading(true);
+    const moviesData = await apiFetcher(searchTerm);
+    setMovies(moviesData.results);
+    setLoading(false);
+  };  
+
   useEffect(() => {
-    const fetchMoviesData = async () => {
-      const moviesData = await apiFetcher();
-      setMovies(moviesData.results);
-      setLoading(false);
-    };
     fetchMoviesData();
   }, []);
 
-  useEffect(() => {
-    if (searchTerm) {
-      const filteredMovies = movies.filter((movie) =>
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredMovies(filteredMovies);
-    } else {
-      setFilteredMovies(movies);
-    }
-  }, [searchTerm, movies]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    fetchMoviesData(searchTerm);
+  };
 
-  if (loading) {
-    return <div>Loading..</div>;
-  } else {
-    return (
-            <div>
-              <div className="search-container">
-                <input 
-                  type="text"
-                  placeholder="Search movies"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>  
-              <div className="home_movieGridContainer">
-                {filteredMovies.map((movie, index) => (
-                  <Movie
-                    key={index}
-                    props={movie}
-                    withAddButton={true}
-                    withDescription={false}
-                    navigationClick={() => navigationClick(movie)}
-                    posterWidth={posterWidth}
-                    runPriceAlgoritm={true}
-                  />
-                ))}
-              </div>
-            </div>
-          );
-  }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search movies"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyUp={(e) => e.key === 'Enter' && handleSubmit(e)}
+          />
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      {loading && <div>Loading...</div>}
+      <div className="home_movieGridContainer">
+        {movies.map((movie, index) => (
+          <Movie
+            key={index}
+            props={movie}
+            withAddButton={true}
+            withDescription={false}
+            navigationClick={() => navigationClick(movie)}
+            posterWidth={posterWidth}
+            runPriceAlgoritm={true}
+            clickableImage={true}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 /*  <Link to={{
@@ -73,4 +70,10 @@ const HomePageView = () => {
                         state: { props }
                     }}>
                     */
+
+
 export default HomePageView;
+
+
+
+
