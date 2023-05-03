@@ -60,6 +60,7 @@ const HomePageView = () => {
                     navigationClick={() => navigationClick(movie)}
                     posterWidth={posterWidth}
                     runPriceAlgoritm={true}
+                    clickableImage={true}
                   />
                 ))}
               </div>

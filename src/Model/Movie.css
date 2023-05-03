@@ -14,7 +14,7 @@
     border-radius: 6px;
 }
 
-.movieContainer img:hover {
+.hoverableImage img:hover {
     cursor: pointer;
 }
 
