@@ -10,7 +10,8 @@ const Movie = ({ props,
                  withDescription,   
                  navigationClick, 
                  posterWidth, 
-                 runPriceAlgoritm
+                 runPriceAlgoritm,
+                 clickableImage,
                 }) => {
 
     const dispatch = useDispatch();
@@ -94,13 +95,13 @@ const Movie = ({ props,
         //Sets max-width or regular width depending on the image size
         //so that flex box does not break due to a fixed width on a larger image.
 
-        <div className="movieContainer" style={{
+        <div className={clickableImage ? 'hoverableImage movieContainer' : 'movieContainer'}  style={{
             width: largeImage ? '' : imageSizeInPixels,
-            maxWidth: largeImage ? imageSizeInPixels : 'none'
+            maxWidth: largeImage ? imageSizeInPixels : ''
         }}>
-            <img onClick={navigationClick} src={posterUrl} alt={'The cover of: ' + props.title} />
+            <img  onClick={clickableImage ? navigationClick : null} src={posterUrl} alt={'The cover of: ' + props.title} />
             {
-                //Displays button depending on if argument withButton is true
+                //Displays button depending on if withButton is true
                 withAddButton ? (
                     <div className='addButton'>
                         <button onClick={addToCartHandler}>+ Add to cart</button>
@@ -108,7 +109,7 @@ const Movie = ({ props,
                 ) : null
             }
                  {
-                //Displays button depending on if argument withButton is true
+                //Displays button depending on if withButton is true
                 withRemoveButton ? (
                     <div className='removeButton'>
                         <button onClick={removeFromCartHandler}>- Remove</button>
