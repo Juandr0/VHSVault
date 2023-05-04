@@ -8,18 +8,31 @@ const HomePageView = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
   const navigate = useNavigate();
   const posterWidth = 200;
+
 
   const navigationClick = (movie) => {
     const id = movie.id;
     navigate(`/movie/${id}`, { state: { movie } });
   };
 
+  useEffect(() => {
+    //If statement stops the code from running at entering the site
+    if (pageNumber != 1) {
+      fetchMoviesData()
+    }
+  },[pageNumber])
   const fetchMoviesData = async (searchTerm = '') => {
     setLoading(true);
-    const moviesData = await apiFetcher(searchTerm);
-    setMovies(moviesData.results);
+    const moviesData = await apiFetcher(searchTerm, pageNumber);
+
+    if (pageNumber > 1) {
+      setMovies([...movies, ...moviesData.results])
+    } else {
+      setMovies(moviesData.results);
+    }
     setLoading(false);
   };  
 
@@ -31,6 +44,18 @@ const HomePageView = () => {
     e.preventDefault();
     fetchMoviesData(searchTerm);
   };
+
+
+  //Scroll event listener 
+  useEffect(() => {
+    const handelScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight){
+        setPageNumber(pageNumber +1);
+      }
+    }
+    window.addEventListener('scroll', handelScroll);
+  }, []); 
+
 
   return (
     <div>
