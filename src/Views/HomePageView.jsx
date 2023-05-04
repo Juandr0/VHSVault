@@ -54,7 +54,7 @@ const HomePageView = () => {
       }
     }
     window.addEventListener('scroll', handelScroll);
-  }, []); 
+  }, [pageNumber]); 
 
 
   return (
