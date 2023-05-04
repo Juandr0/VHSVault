@@ -21,7 +21,7 @@ const HomePageView = () => {
   useEffect(() => {
     //If statement stops the code from running at entering the site
     if (pageNumber != 1) {
-      fetchMoviesData()
+      fetchMoviesData(searchTerm)
     }
   },[pageNumber])
   const fetchMoviesData = async (searchTerm) => {
