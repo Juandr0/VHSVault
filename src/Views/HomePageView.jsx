@@ -24,7 +24,7 @@ const HomePageView = () => {
       fetchMoviesData()
     }
   },[pageNumber])
-  const fetchMoviesData = async (searchTerm = '') => {
+  const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
     const moviesData = await apiFetcher(searchTerm, pageNumber);
 
@@ -41,6 +41,8 @@ const HomePageView = () => {
   }, []);
 
   const handleSubmit = async (e) => {
+    setMovies([]);
+    setPageNumber(1);
     e.preventDefault();
     fetchMoviesData(searchTerm);
   };
@@ -59,7 +61,7 @@ const HomePageView = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}  >
         <div className="search-container">
           <input
             type="text"
