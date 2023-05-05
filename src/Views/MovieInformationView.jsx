@@ -2,14 +2,21 @@ import { json, useLocation } from 'react-router-dom';
 import Movie from '../Model/Movie';
 import './CSS/MovieInformationView.css';
 import apiFetcher from '../Components/apiFetcher';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MovieInformationView = () => {
     const location = useLocation();
+    const [currentUrl, setCurrentUrl] = useState(location.pathname)
     const [movie, setMovie] = useState(location.state?.movie);
+
+
+    useEffect(() => {
+        setMovie(undefined);
+    }, [location.pathname]);
 
     useEffect(() => {
         if (!movie) {
+            console.log('function running');
             const providedMovieId = location.pathname.split('/')[2];
             const fetchMovieData = async () => {
                 const movieData = await apiFetcher(null, null, providedMovieId);
@@ -17,11 +24,10 @@ const MovieInformationView = () => {
             }
             fetchMovieData();       
         }
-    }, [location.pathname]);
+    }, [location.pathname, movie]);
 
 
     const posterWidth = 500;
-    console.log('moviedata \n\n\n\n\n' + movie);
     if (movie?.title) {
         return (
             <div>
@@ -32,6 +38,12 @@ const MovieInformationView = () => {
                     posterWidth={posterWidth}
                     runPriceAlgoritm={true}
                 />
+            </div>
+        )
+    } else {
+        return(
+            <div>
+                <h1>Loading... Does the url exist?</h1>
             </div>
         )
     }
