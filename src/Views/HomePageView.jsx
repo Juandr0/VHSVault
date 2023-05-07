@@ -51,7 +51,7 @@ const HomePageView = () => {
   //Scroll event listener 
   useEffect(() => {
     const handelScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight){
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight * 0.9){
         setPageNumber(pageNumber +1);
       }
     }
