@@ -29,6 +29,10 @@ const Movie = ({ props,
         dispatch(removeFromCart(props.title));
     }
 
+    const cartNotification = () => {
+
+    }
+
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
 
@@ -141,6 +145,7 @@ const Movie = ({ props,
             }
         </div>
     )
+
 }
 
 export default Movie;
