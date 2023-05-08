@@ -12,7 +12,7 @@ const showNotification = async (message) => {
   notificationContainer.appendChild(notificationDiv);
   document.body.appendChild(notificationContainer);
 
-  await new Promise((resolve) => setTimeout(resolve, 1800));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   notificationDiv.classList.add('hide');
   await new Promise((resolve) => setTimeout(resolve, 300));
