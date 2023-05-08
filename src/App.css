@@ -7,21 +7,5 @@
   margin: 0 auto;
 }
 
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5px;
-  margin-top: 60px;
-}
-
-input[type="text"] {
-  width: 400px;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-right: 10px;
-}
 
 

@@ -18,6 +18,7 @@ const apiFetcher = async (searchTerm , pageNumber, idFetch) => {
   
   
   return data;
-};
+}
+
 
 export default apiFetcher;
