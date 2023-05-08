@@ -1,4 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
+import './cartSlice.css';
+
+
+const showNotification = async (message) => {
+  const notificationContainer = document.createElement('div');
+  notificationContainer.classList.add('notificationContainer');
+
+  const notificationDiv = document.createElement('div');
+  notificationDiv.classList.add('notificationWindow');
+  notificationDiv.textContent = message;
+  notificationContainer.appendChild(notificationDiv);
+  document.body.appendChild(notificationContainer);
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  notificationDiv.classList.add('hide');
+  await new Promise((resolve) => setTimeout(resolve, 300));
+  document.body.removeChild(notificationContainer);
+};
+
+
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -22,6 +43,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload, count: 1 });
       }
+      showNotification(`Added ${action.payload.title} to the cart`);
     },
     increaseAmount: (state, action) => {
       const newState = state.items.map((cartItem) => {
@@ -54,6 +76,8 @@ const cartSlice = createSlice({
     },
   },
 });
+
+
 
 export const {
   addToCart,
