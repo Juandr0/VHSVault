@@ -37,6 +37,7 @@ const Movie = ({ props,
 
     const largeImage = posterWidth > 200;
     const imageSizeInPixels = posterWidth + 'px';
+    const oneDecimalRating = Math.round(props.vote_average * 10) / 10;
 
 
     switch (runPriceAlgoritm) {
@@ -138,7 +139,7 @@ const Movie = ({ props,
                     <div>
                         <p>{props.overview}</p>
                         <p>Original language: {props.original_language}</p>
-                        <p>Average rating: {props.vote_average}</p>
+                        <p>Rating: {oneDecimalRating} / 10</p>
                     </div>
 
                 ) : null
