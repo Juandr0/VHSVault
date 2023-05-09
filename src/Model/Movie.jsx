@@ -4,6 +4,7 @@ import { addToCart, removeFromCart} from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 
 
+
 const Movie = ({ props, 
                  withAddButton, 
                  withRemoveButton,
@@ -29,9 +30,7 @@ const Movie = ({ props,
         dispatch(removeFromCart(props.title));
     }
 
-    const cartNotification = () => {
-
-    }
+ 
 
     const moviePriceMakerAlgoritm = (props.vote_average * 7) + (props.popularity / 2);
     let finalPrice;
@@ -90,8 +89,9 @@ const Movie = ({ props,
             break;
     }
 
-    const posterPath = props.poster_path;
-    const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
+    const posterUrl = props.poster_path 
+    ? `https://image.tmdb.org/t/p/w500${props.poster_path}`
+    : `https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png`;
 
 
     return (
