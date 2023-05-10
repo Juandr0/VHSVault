@@ -9,7 +9,6 @@ import { Route, Routes } from 'react-router-dom';
 import apiFetcher from './Components/apiFetcher';
 import { useEffect } from 'react';
 
-
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
