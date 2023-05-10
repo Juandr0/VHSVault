@@ -101,7 +101,7 @@ const Movie = ({ props,
         //so that flex box does not break due to a fixed width on a larger image.
 
         <div className={clickableImage ? 'hoverableImage movieContainer' : 'movieContainer'}  style={{
-            width: largeImage ? '' : imageSizeInPixels,
+            width: largeImage ? largeImage : imageSizeInPixels,
             maxWidth: largeImage ? imageSizeInPixels : ''
         }}>
             <img  onClick={clickableImage ? navigationClick : null} src={posterUrl} alt={'The cover of: ' + props.title} />
