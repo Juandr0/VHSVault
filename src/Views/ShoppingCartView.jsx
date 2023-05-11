@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlice";
 import { setOrderDetails } from "../features/orderSlice";
 import './CSS/ShoppingCartView.css';
-import Movie from '../Model/Movie'
+import ShoppingCartMovie from '../Model/ShoppingCartMovie';
 
 const MovieCard = ({ movie, index }) => {
   const dispatch = useDispatch();
   const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
   const posterWidth = 200;
-  
+
   // return (
   //   <div className="movie-card" key={`${movie.title}-${index}`}>
   //     <img src={movie.imageURL} alt={movie.title} className="movie-cover" />
@@ -23,15 +23,9 @@ const MovieCard = ({ movie, index }) => {
   //   </div>
   // );
   return (
-    <Movie 
-      props = {movie}
-      withRemoveButton={true}
-      withDescription={false}
-      posterWidth={posterWidth}
-      runPriceAlgoritm={false}
-    />
+    <ShoppingCartMovie props={movie} />
   )
- 
+
 }
 
 const ShoppingCartView = () => {
@@ -48,20 +42,26 @@ const ShoppingCartView = () => {
   };
 
   return (
+    <div>
+    <h2 id="shoppingCartCheckout">Checkout</h2>
     <div className="shopping-cart">
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div className="summary">
-          <div className="cart-items">
+        
+        <div className="checkoutContainer">
+          <div>
             {cartItems.map((item, index) => (
               <MovieCard key={index} movie={item} index={index} />
             ))}
           </div>
-          <div className="checkout-summary">
-            <p className="total">Total: ${total.toFixed(2)}</p>
-            <p className="item-count">{cartItems.length} items in cart</p>
-            <form>
+          <div className="checkoutInputField">
+          <p className="item-count">{cartItems.length} {cartItems.length > 1 ? 'items' : 'item'} in the cart</p>
+
+            <p className="total">Total: ${(total).toFixed(2)}</p>
+        
+            <h3>Shipping information</h3>
+            <form className="checkoutForm">
               <label htmlFor="name">Name</label>
               <input type="text" id="name" required />
               <label htmlFor="email">Email</label>
@@ -72,13 +72,16 @@ const ShoppingCartView = () => {
               <input type="tel" id="phone" required />
             </form>
             <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
-            Place Order
+              Place Order
             </Link>
             <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
           </div>
+
         </div>
       )}
     </div>
+    </div>
+    
   );
 }
 
