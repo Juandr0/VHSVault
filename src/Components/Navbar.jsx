@@ -3,8 +3,7 @@ import './Navbar.css';
 import '../App.css';
 import { Link, Route, NavLink, useNavigate } from 'react-router-dom';
 
-
-const Navbar = ({ handleSubmit, searchTerm, setSearchTerm }) => {
+const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleKeyPress = (event) => {
@@ -22,7 +21,6 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-
   return (
     <nav className='navBar'>
       <div className='menuToggle' onClick={handleMenuToggle}>
@@ -35,13 +33,19 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm }) => {
         </li>
       </ul>
 
+      <select onChange={(e) => handleCategory(e, e.target.value)}>
+          <option value="">Select a category</option>
+          <option value="28">Action</option>
+          <option value="35">Comedy</option>
+          <option value="27">Horror</option>
+      </select>
+
+
       <ul className={`menuList ${isMenuOpen ? 'open' : ''}`}>
         <li>
           <Link to="/best-rated" onClick={handleMenuToggle} className="navLink">Best rated</Link>
         </li>
-        <li>
-          <Link to="/" onClick={() => handleCategory('Action')} className="navLink">Categories</Link>
-        </li>
+        <Link to="/" onClick={handleMenuToggle} className="navLink">Categories</Link>
       </ul>
 
       <ul className='navBarList'>

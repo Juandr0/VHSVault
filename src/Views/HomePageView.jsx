@@ -24,6 +24,7 @@ const HomePageView = ({ movies, loading }) => {
     window.addEventListener('scroll', handelScroll);
   }, [pageNumber]);
 
+
   return (
     <div>
       {loading && <div>Loading...</div>}
