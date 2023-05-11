@@ -37,9 +37,13 @@ const ShoppingCartMovie = ({ props,
                       type="number"
                       id="amount"
                       className="cartMovieAmount"
-                      pattern="[0-9]"
                       min="1"
                       max="999"
+                      minLength="0"
+                      maxLength="3"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.slice(0, 3);
+                      }}
                     />
                   </label>
                   <button>+</button>

@@ -23,7 +23,7 @@ input[type=number]{
 
 .cartItemProperties {
     align-items: center;
-    padding-top: 6px;
+    padding-top: 3.5px;
 }
 
 .cartMovieContainer  {
@@ -67,6 +67,7 @@ input[type=number]{
 }
 
 .cartMovieAmount {
+    padding: 14px 7px 7px;
     border: none;
     background-color: transparent;
     text-align: center;
