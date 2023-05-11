@@ -60,15 +60,6 @@ input[type=number]{
     border: none;
     border-right: 1px solid rgba(128, 128, 128, 0.53);
 }
-
-.cartMovieTitle {
-    
-}
-
-.cartItemProperties {
-
-}
-
 .cartMoviePrice {
     margin-left: auto;
 }
@@ -108,3 +99,32 @@ outline: none;
 .cartMovieAmount:focus {
     outline: none;
 }
+
+@media (max-width: 700px) {
+  .shoppingCartMovieContainer {
+    display: flex;
+    width: 50vw;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+
+    .cartMoviePrice {
+        margin-right: 10px;
+        margin-left: 3px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .cartItemProperties {
+        flex-wrap: wrap;
+    }
+    .cartMoviePrice {
+        margin-left: auto;
+        
+    }
+}
+
+
+

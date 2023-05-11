@@ -42,6 +42,8 @@ const ShoppingCartView = () => {
   };
 
   return (
+    <div>
+    <h2 id="shoppingCartCheckout">Checkout</h2>
     <div className="shopping-cart">
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -54,8 +56,10 @@ const ShoppingCartView = () => {
             ))}
           </div>
           <div className="checkoutInputField">
+          <p className="item-count">{cartItems.length} items in the cart</p>
             <p className="total">Total: ${total.toFixed(2)}</p>
-            <p className="item-count">{cartItems.length} items in the cart</p>
+        
+            <h3>Shipping information</h3>
             <form className="checkoutForm">
               <label htmlFor="name">Name</label>
               <input type="text" id="name" required />
@@ -75,6 +79,8 @@ const ShoppingCartView = () => {
         </div>
       )}
     </div>
+    </div>
+    
   );
 }
 
