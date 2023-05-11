@@ -9,11 +9,13 @@ import { Route, Routes } from 'react-router-dom';
 import apiFetcher from './Components/apiFetcher';
 import { useEffect } from 'react';
 
+
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [category, setCategory] = useState(null);
 
   useEffect(() => {
     //If statement stops the code from running at entering the site
@@ -38,6 +40,22 @@ function App() {
     fetchMoviesData();
   }, []);
 
+  const fetchCategoriesData = async (category) => {
+    setLoading(true);
+    const moviesData = await apiFetcher(null, pageNumber, null, category);
+
+    if (pageNumber > 1) {
+      setMovies([...movies, ...moviesData.results])
+    } else {
+      setMovies(moviesData.results);
+    }
+    setLoading(false);
+  };  
+
+  useEffect(() => {
+    fetchMoviesData();
+  }, []);
+
   const handleSubmit = async (e) => {
     setMovies([]);
     setPageNumber(1);
@@ -45,7 +63,14 @@ function App() {
     fetchMoviesData(searchTerm);
   };
 
+  const handleCategory = (e, category) => {
+    setMovies([]);
+    setPageNumber(1);
+    e.preventDefault();
+    fetchCategoriesData(category);
+  };
 
+  
   //Scroll event listener 
   useEffect(() => {
     const handelScroll = () => {
@@ -58,7 +83,12 @@ function App() {
 
   return (
     <div>
-      <Navbar handleSubmit={handleSubmit} setSearchTerm={setSearchTerm} apiFetcher={apiFetcher} fetchMoviesData={fetchMoviesData}  />
+      <Navbar
+      handleCategory={handleCategory}
+      handleSubmit={handleSubmit}
+      setSearchTerm={setSearchTerm}
+      apiFetcher={apiFetcher}
+      fetchMoviesData={fetchMoviesData} />
       <Routes>
         <Route
           path="/"
@@ -66,6 +96,7 @@ function App() {
             <HomePageView
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
+              category={category}
               movies={movies}
               loading={loading}
               fetchMoviesData={fetchMoviesData}

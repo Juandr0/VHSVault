@@ -18,16 +18,6 @@ const apiFetcher = async (searchTerm , pageNumber, idFetch, category) => {
     return 404;
   }
   const data = await apiCall.json();
-
-  // const categoriesURL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
-  
-  // fetch(categoriesURL)
-  // .then(response => response.json())
-  // .then(data => {
-  //   const genres = data.genres;
-  //   genres.forEach(genre => console.log(genre.name));
-  // })
-  // .catch(error => console.error(error));
   
   return data;
 }
