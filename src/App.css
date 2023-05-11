@@ -3,90 +3,9 @@
 }
 
 #root {
-  max-width: 1280px;
+  max-width: 960px;
   margin: 0 auto;
 }
-
-.shopping-cart-view {
-  margin-top: 100px;
-  display: flex;
-}
-
-.movie-list {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid gray;
-  margin-bottom: 10px;
-  position: relative;
-  width: 200px;
-  height: 200px;
-  max-width: 350px;
-  margin: 10px auto 0;
-  
-}
-
-.movie-card img {
-  height: 50%; 
-  object-fit: cover; 
-}
-
-.movie-card h3 {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  margin-bottom: 0;
-  text-align: center;
-}
-
-.movie-card p {
-  margin-top: 0;
-  text-align: center;
-  overflow: hidden; /* make sure the text doesn't overflow outside the container */
-  text-overflow: ellipsis; /* add ellipsis to indicate there is more text that's not visible */
-  white-space: nowrap; /* prevent the text from wrapping to the next line */
-}
-
-
-.trash-icon {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  cursor: pointer;
-}
-
-.summary {
-  flex: 0 0 300px;
-  padding: 60px;
-  
-}
-
-.confirm-button {
-  background-color: white;
-  color: black;
-  padding: 10px;
-  border: 2px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.confirm-button:hover {
-  background-color: green;
-  color: white;
-}
-
-
-
-
-
-
 
 
 

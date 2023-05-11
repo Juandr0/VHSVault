@@ -1,0 +1,58 @@
+
+.movieContainer {
+    width: 300px;
+    max-width: 300px;
+    flex-grow: 1;
+    padding: 0px 5px;
+}
+
+
+.movieContainer img {
+    width: 100%;
+    border-radius: 6px;
+    max-width: 300px;
+}
+
+.hoverableImage img:hover {
+    cursor: pointer;
+}
+
+
+.addButton, .removeButton{
+    display: flex;
+    justify-content: end;
+}
+
+.addButton  :hover {
+    background-color: #a12f36;
+    color: white;
+}
+
+.addButton button, .removeButton button{
+    position: relative;
+    top: -30px;
+    right: 0;
+    border: 1px solid black;
+    border-radius: 50px;
+    box-sizing: content-box;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.removeButton button{
+    background-color: red;
+    color: white;
+}
+
+.movieInfoContainer {
+    display: flex;
+    justify-content: space-between ;
+    position: relative;
+    top: -20px;
+}
+
+.price {
+    color: red;
+}
+
+

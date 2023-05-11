@@ -1,16 +1,167 @@
-.navBar ul{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: #a12f36;
+    color: #ebebeb;
+    height: 70px;
+    position: fixed; /* set navbar to fixed position */
+    top: 0; /* position navbar at the top of the viewport */
+    left: 0; /* position navbar on the left side of the viewport */
+    right: 0; /* position navbar on the right side of the viewport */
+    z-index: 999; /* set z-index to make sure navbar is on top of other elements */
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 50px;
+  }
+  
+  .menuToggle {
     display: flex;
     justify-content: center;
-}
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .menuToggle i {
+    margin: 0;
+  }
 
-.navBar li {
+  .navBarList a {
+    color: black;
+  }  
+
+  .navBarList a:hover {
+    color: black;
+  }  
+  
+  .navBarList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
     list-style: none;
-    border: 1px solid rgb(134, 133, 133);
-    padding: 0px 10px;
-    margin: 0px 10px;
-}
+    flex-grow: 1;
+  }
 
+  .navLink {
+    color: black;
+  }
+
+  .navLink:hover {
+    color: black;
+  }
+  
+  .navBarList li {
+    margin: 0 20px;
+    color: black;
+  }
+  
+  .navBarList li:first-child {
+    margin-left: 0;
+  }
+  
+  .navBarList li:last-child {
+    margin-right: 0;
+  }
+  
+  .navBarList li:last-child i {
+    font-size: 24px;
+    color: #ebebeb;
+    
+  }
+  
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    flex-grow: 1;
+  }
+
+  .search-container input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  .search-container input[type="text"]:focus {
+    outline: none;
+    border: 2px solid black;
+  }  
+
+  .fa-search:hover {
+    cursor: pointer;
+  }
+  
+  .menuList {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 70px);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  
+  .menuList.open {
+    transform: translateX(0%);
+  }
+  
+  .menuList li {
+    margin-bottom: 10px;
+  }
+  
+  .menuList li:last-child {
+    margin-bottom: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .navBarList {
+      margin: 0;
+    }
+  
+    .search-container {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  
+    .shopping-cart {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  
+    .menuToggle {
+      display: none;
+    }
+  
+    .menuList {
+      display: flex;
+      position: static;
+      width: auto;
+      height: auto;
+      background-color: transparent;
+      box-shadow: none;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      transform: none;
+      transition: none;
+    }
+  
+    .menuList li {
+      margin: 0 20px;
+    }
+  }
+  
+  
+  
+  
