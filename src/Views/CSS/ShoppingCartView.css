@@ -126,12 +126,15 @@
 .checkoutInputField form input[type="text"],
 .checkoutInputField form input[type="email"],
 .checkoutInputField form input[type="tel"] {
- 
+  width: 55vw;
+}
+
+.confirmation-button, .clear-cart-button {
   width: 55vw;
 }
     
 }
-/* width: 50vw; */
+
 
 
 
