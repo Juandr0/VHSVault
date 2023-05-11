@@ -52,7 +52,7 @@ const ShoppingCartView = () => {
               <MovieCard key={index} movie={item} index={index} />
             ))}
           </div>
-          <div className="checkout-summary">
+          {/* <div className="checkout-summary">
             <p className="total">Total: ${total.toFixed(2)}</p>
             <p className="item-count">{cartItems.length} items in cart</p>
             <form>
@@ -69,7 +69,7 @@ const ShoppingCartView = () => {
               Place Order
             </Link>
             <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

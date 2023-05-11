@@ -1,0 +1,82 @@
+/* Removes up and down arrows from the input field */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number]{
+    -moz-appearance: textfield;
+}
+
+
+
+.shoppingCartMovieContainer {
+    display: flex;
+    width: 60vw;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+.cartAmountContainer, .cartItemProperties{
+    display: flex;
+}
+
+.cartItemProperties {
+    align-items: center;
+    padding-top: 6px;
+}
+
+.cartMovieContainer  {
+    flex: 1;
+}
+
+.shoppingCartMovieContainer img {
+    height: 100px;
+    margin: 2px 0px ;
+    padding-right: 20px;
+}
+
+.cartAmountContainer {
+    border: 1px solid rgba(128, 128, 128, 0.53);
+    height: 25px;
+}
+
+.cartAmountContainer button {
+    background-color: transparent;
+    align-self: center;
+    height: 25px;
+    color: #3498db;
+    font-size: 0.6em; 
+    border: 1px solid rgba(128, 128, 128, 0.075);
+    border-radius: 0;
+    padding: 5px 10px; 
+}
+
+
+.cartMovieTitle {
+
+}
+
+.cartItemProperties {
+
+}
+
+.cartMoviePrice {
+    margin-left: auto;
+}
+
+.cartMovieAmount {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    height: 15px;
+}
+
+.cartMovieAmount:hover {
+    cursor: pointer;
+}
+
+.cartMovieAmount:focus {
+    outline: none;
+}
