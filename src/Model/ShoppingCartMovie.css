@@ -42,17 +42,24 @@ input[type=number]{
 }
 
 .cartAmountContainer button {
+    outline: none;
     background-color: transparent;
     align-self: center;
     height: 30px;
-    color: #3498db;
+    color: rgba(128, 128, 128, 0.53);
     font-size: 1.3em; 
-    border: 1px solid rgba(128, 128, 128, 0.192);
     border-radius: 0;
     padding: 2px 10px 5px 10px; 
     line-height: 0%;
 }
-
+.cartButtonPlus {
+    border: none;
+    border-left: 1px solid rgba(128, 128, 128, 0.53);
+}
+.cartButtonMinus {
+    border: none;
+    border-right: 1px solid rgba(128, 128, 128, 0.53);
+}
 
 .cartMovieTitle {
     
@@ -74,8 +81,28 @@ input[type=number]{
     height: 15px;
 }
 
+
+.cartAmountContainer button:focus {
+outline: none;
+}
+
+
+/* Hover effects */
+.cartAmountContainer button:hover {
+    color: #3498db;
+    outline: none;
+}
+
+.cartButtonPlus:hover{
+    border-left: 1px solid rgba(128, 128, 128, 0.53);
+}
+.cartButtonMinus:hover{
+    border-right: 1px solid rgba(128, 128, 128, 0.53);
+}
+
+
 .cartMovieAmount:hover {
-    cursor: pointer;
+    cursor: text;
 }
 
 .cartMovieAmount:focus {

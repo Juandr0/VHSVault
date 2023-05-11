@@ -23,7 +23,7 @@ const MovieCard = ({ movie, index }) => {
   //   </div>
   // );
   return (
-    <ShoppingCartMovie props={movie}/>
+    <ShoppingCartMovie props={movie} />
   )
 
 }
@@ -46,16 +46,17 @@ const ShoppingCartView = () => {
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div className="summary">
-          <div className="cart-items">
+        
+        <div className="checkoutContainer">
+          <div>
             {cartItems.map((item, index) => (
               <MovieCard key={index} movie={item} index={index} />
             ))}
           </div>
-          {/* <div className="checkout-summary">
+          <div className="checkoutInputField">
             <p className="total">Total: ${total.toFixed(2)}</p>
-            <p className="item-count">{cartItems.length} items in cart</p>
-            <form>
+            <p className="item-count">{cartItems.length} items in the cart</p>
+            <form className="checkoutForm">
               <label htmlFor="name">Name</label>
               <input type="text" id="name" required />
               <label htmlFor="email">Email</label>
@@ -69,7 +70,8 @@ const ShoppingCartView = () => {
               Place Order
             </Link>
             <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
-          </div> */}
+          </div>
+
         </div>
       )}
     </div>
