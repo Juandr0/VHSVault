@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlice";
 import { setOrderDetails } from "../features/orderSlice";
 import './CSS/ShoppingCartView.css';
-import Movie from '../Model/Movie'
+import ShoppingCartMovie from '../Model/ShoppingCartMovie';
 
 const MovieCard = ({ movie, index }) => {
   const dispatch = useDispatch();
   const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
   const posterWidth = 200;
-  
+
   // return (
   //   <div className="movie-card" key={`${movie.title}-${index}`}>
   //     <img src={movie.imageURL} alt={movie.title} className="movie-cover" />
@@ -23,15 +23,9 @@ const MovieCard = ({ movie, index }) => {
   //   </div>
   // );
   return (
-    <Movie 
-      props = {movie}
-      withRemoveButton={true}
-      withDescription={false}
-      posterWidth={posterWidth}
-      runPriceAlgoritm={false}
-    />
+    <ShoppingCartMovie props={movie}/>
   )
- 
+
 }
 
 const ShoppingCartView = () => {
@@ -72,7 +66,7 @@ const ShoppingCartView = () => {
               <input type="tel" id="phone" required />
             </form>
             <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
-            Place Order
+              Place Order
             </Link>
             <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
           </div>
