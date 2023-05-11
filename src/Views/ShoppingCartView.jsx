@@ -56,8 +56,9 @@ const ShoppingCartView = () => {
             ))}
           </div>
           <div className="checkoutInputField">
-          <p className="item-count">{cartItems.length} items in the cart</p>
-            <p className="total">Total: ${total.toFixed(2)}</p>
+          <p className="item-count">{cartItems.length} {cartItems.length > 1 ? 'items' : 'item'} in the cart</p>
+
+            <p className="total">Total: ${(total).toFixed(2)}</p>
         
             <h3>Shipping information</h3>
             <form className="checkoutForm">
