@@ -67,9 +67,10 @@ function App() {
     setMovies([]);
     setPageNumber(1);
     e.preventDefault();
-    fetchCategoriesData(category);
+    const categoryId = category.value; // extract the category value
+    fetchCategoriesData(categoryId);
   };
-
+  
   
   //Scroll event listener 
   useEffect(() => {
