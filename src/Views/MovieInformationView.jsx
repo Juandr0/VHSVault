@@ -102,6 +102,7 @@ const MovieInformationView = () => {
                 </div>
 
                 <div className='newCommentContainer'>
+                    <h3>Add a new comment</h3>
                     <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />
                 </div>
             </div>
