@@ -20,12 +20,11 @@ const showNotification = async (message) => {
 };
 
 const cartSlice = createSlice({
-    name: 'cart',
-    initialState: {
-      items: [
-
-      ]
-    },
+  name: 'cart',
+  initialState: {
+    items: [],
+    cartCount: 0,
+  },
   reducers: {
     addToCart: (state, action) => {
       const found = state.items.find((cartItem) => cartItem.title === action.payload.title);
@@ -42,9 +41,9 @@ const cartSlice = createSlice({
         state.items.push({ ...action.payload, count: 1 });
       }
       showNotification(`Added ${action.payload.title} to the cart`);
+      state.cartCount++;
       state.total = state.items.reduce((acc, curr) => acc + curr.price * curr.count, 0);
-},
-    
+    },
     increaseAmount: (state, action) => {
       const newState = state.items.map((cartItem) => {
         if (cartItem.title === action.payload.title) {
@@ -66,18 +65,15 @@ const cartSlice = createSlice({
       state.items = newState;
     },
     removeFromCart: (state, action) => {
-        const newState = state.items.filter(
-          (cartItem) => cartItem.title !== action.payload
-        );
-        state.items = newState;
-      },        
+      const newState = state.items.filter((cartItem) => cartItem.title !== action.payload);
+      state.items = newState;
+    },
     clearCart: (state) => {
       state.items = [];
+      state.cartCount = 0;
     },
   },
 });
-
-
 
 export const {
   addToCart,
@@ -88,5 +84,6 @@ export const {
 } = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.items;
+export const selectCartCount = (state) => state.cart.cartCount;
 export default cartSlice.reducer;
 
