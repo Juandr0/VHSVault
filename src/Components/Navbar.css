@@ -15,6 +15,12 @@
     margin-bottom: 50px;
   }
 
+  .best-rated {
+
+    margin-right: 30px;
+
+  }
+
   .select-container {
     position: relative;
     display: inline-block;
