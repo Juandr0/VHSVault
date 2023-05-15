@@ -9,6 +9,7 @@ const apiFetcher = async (searchTerm , pageNumber, idFetch, category, bestRated)
     url = `https://api.themoviedb.org/3/movie/${idFetch}?api_key=${apiKey}&language=en-US`;
   } else if (category) {
     url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&vote_count.gte=1000&page=${pageNumber}&with_genres=${category}`;
+
   } else if (bestRated) {
     url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&primary_release_date.lte=2005-12-31&vote_count.gte=1000&page=${pageNumber}`;
 

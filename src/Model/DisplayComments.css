@@ -1,0 +1,32 @@
+.commentsContainer {
+    background-color: #f5f5f5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .commentsContainer:nth-child(odd) {
+    background-color: #e8e8e8;
+  }
+  
+  .commentName, .commentComment, .commentUpvotes {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+
+  .commentName, .commentUpvotes {
+    text-align: center;
+  }
+
+  .commentComment {
+    margin: 10px 0;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 2px;
+  }
+  
+  .commentName p, .commentComment p, .commentUpvotes p {
+    margin: 0;
+  }
+  

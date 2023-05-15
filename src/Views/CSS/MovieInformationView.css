@@ -1,0 +1,61 @@
+.MovieInfoViewContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.readCommentsContainer {
+    width: 250px;
+    background-color: #a12f36;
+    padding: 10px;
+    margin-left: auto;
+    border-radius: 5px;
+    overflow: auto;
+    max-height: 700px;
+}
+
+.readCommentsContainer h3{
+    color: white;
+    text-align: center;
+}
+
+
+.newCommentContainer {
+    margin-top: 10px;
+    background-color: #e8e8e8;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+@media (max-width: 565px) {
+    .MovieInfoViewContainer {
+      
+        margin: 150px 10px 10px 10px;
+    }
+    .readCommentsContainer {
+        width: 100%;
+        background-color: #a12f36;
+        padding: 10px;
+        margin: 10px;;
+        border-radius: 5px;
+        overflow: auto;
+        max-height: 700px;
+    }
+
+
+    .readCommentsContainer{
+        margin-top: 50px;
+        flex-wrap: wrap;
+    }
+
+    .newCommentContainer {
+        margin: 20px;
+    }
+}
+
+
+@media (max-width: 549px) {
+ 
+ 
+
+    }
