@@ -10,18 +10,7 @@ const MovieCard = ({ movie, index }) => {
   const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
   const posterWidth = 200;
 
-  // return (
-  //   <div className="movie-card" key={`${movie.title}-${index}`}>
-  //     <img src={movie.imageURL} alt={movie.title} className="movie-cover" />
-  //     <div className="movie-info">
-  //       <h3 className="movie-title">{movie.title}</h3>
-  //       <p className="movie-price">${movie.price}</p>
-  //       <div className="trash-icon" onClick={removeFromCartHandler}>
-  //         🗑️
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
+
   return (
     <ShoppingCartMovie props={movie} />
   )
