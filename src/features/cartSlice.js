@@ -19,8 +19,6 @@ const showNotification = async (message) => {
   document.body.removeChild(notificationContainer);
 };
 
-
-
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
@@ -44,7 +42,9 @@ const cartSlice = createSlice({
         state.items.push({ ...action.payload, count: 1 });
       }
       showNotification(`Added ${action.payload.title} to the cart`);
-    },
+      state.total = state.items.reduce((acc, curr) => acc + curr.price * curr.count, 0);
+},
+    
     increaseAmount: (state, action) => {
       const newState = state.items.map((cartItem) => {
         if (cartItem.title === action.payload.title) {
