@@ -15,6 +15,16 @@
     margin-bottom: 50px;
   }
 
+  .cart-count {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 50%;
+  }
+  
+  
+
   .best-rated {
 
     margin-right: 30px;
