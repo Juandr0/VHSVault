@@ -94,7 +94,7 @@ const MovieInformationView = () => {
                         runPriceAlgoritm={true}
                     />
                     <div className='readCommentsContainer'>
-                            <h3>Comments:</h3>
+                          <h3>User comments</h3>
                             {comments.map((comment, index) => (
                                 <DisplayComments comment={comment} key={index}/>
                             ))}

@@ -6,9 +6,9 @@ const DisplayComments = ({comment}) => {
    
     return (
         <div className="commentsContainer">
-              <p>Name: {comment.name}</p>
-              <p>Comment: {comment.comment}</p>
-              <p>Upvotes: {comment.upvotes}</p>
+            <div className="commentName"><p>By: {comment.name}</p></div>
+            <div className="commentComment"><p>{comment.comment}</p></div>
+            <div className="commentUpvotes"><p>{comment.upvotes}</p></div>
         </div>
       );
 }

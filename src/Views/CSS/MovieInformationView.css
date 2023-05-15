@@ -1,11 +1,19 @@
 .MovieInfoViewContainer {
-    margin-top: -150px;
     display: flex;
+    flex-wrap: 1;
 }
 
 .readCommentsContainer {
-    border: 2px solid blue;
     width: 250px;
+    background-color: #a12f36;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.readCommentsContainer h3{
+    margin-top: 0;
+    color: white;
+    text-align: center;
 }
 
 
