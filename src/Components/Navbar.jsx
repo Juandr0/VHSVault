@@ -3,7 +3,7 @@ import './Navbar.css';
 import '../App.css';
 import { Link, Route, NavLink, useNavigate } from 'react-router-dom';
 
-const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => {
+const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetchBestRatedData }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
@@ -40,11 +40,9 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => 
       </ul>
 
       <ul className={`menuList ${isMenuOpen ? 'open' : ''}`}>
-        <li>
-          <Link to="/best-rated" onClick={handleMenuToggle} className="navLink">Best rated</Link>
-        </li>
 
-        <div>
+      <div className='best-rated' onClick={fetchBestRatedData}> Best Rated </div>
+
       <div className="dropdown">
         <div className="dropdown-header" onClick={toggleOptions}>
           {selectedOption ? selectedOption.label : 'Categories'}
@@ -62,11 +60,9 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => 
             </div>
           </div>
         }
-      </div>
     </div>
-      </ul>
+    </ul>
   
-
       <ul className='navBarList'>
       <i className="fa fa-search fa-lg"></i>
       <form onSubmit={handleSubmit} onKeyUp={handleKeyPress}>
