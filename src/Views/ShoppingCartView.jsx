@@ -26,6 +26,7 @@ const ShoppingCartView = () => {
     const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
     dispatch(setOrderDetails({ name, email, address, phone, items: cartItems, total }));
+    clearCartHandler();
   };
 
   return (
