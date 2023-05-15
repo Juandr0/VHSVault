@@ -10,16 +10,14 @@ const MovieCard = ({ movie, index }) => {
   const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
   const posterWidth = 200;
 
-
   return (
     <ShoppingCartMovie props={movie} />
   )
-
 }
 
 const ShoppingCartView = () => {
   const cartItems = useSelector(selectCartItems);
-  const total = cartItems.reduce((acc, curr) => acc + curr.price, 0);
+  const total = cartItems.reduce((acc, curr) => acc + curr.price * curr.count, 0);
   const dispatch = useDispatch();
   const clearCartHandler = () => dispatch(clearCart());
   const placeOrderHandler = () => {
@@ -28,6 +26,7 @@ const ShoppingCartView = () => {
     const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
     dispatch(setOrderDetails({ name, email, address, phone, items: cartItems, total }));
+    clearCartHandler();
   };
 
   return (
@@ -45,8 +44,11 @@ const ShoppingCartView = () => {
             ))}
           </div>
           <div className="checkoutInputField">
-          <p className="item-count">{cartItems.length} {cartItems.length > 1 ? 'items' : 'item'} in the cart</p>
-
+            
+          <p className="item-count">
+          {cartItems.reduce((acc, curr) => acc + curr.count, 0)}{' '}
+          {cartItems.reduce((acc, curr) => acc + curr.count, 0) > 1 ? 'items' : 'item'} in the cart
+           </p>
             <p className="total">Total: ${(total).toFixed(2)}</p>
         
             <h3>Shipping information</h3>
