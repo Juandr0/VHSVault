@@ -5,6 +5,12 @@ import { Link, Route, NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
+
+  function toggleOptions() {
+    setShowOptions(!showOptions);
+  }
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -33,20 +39,33 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => 
         </li>
       </ul>
 
-      <select onChange={(e) => handleCategory(e, e.target.value)}>
-          <option value="">Select a category</option>
-          <option value="28">Action</option>
-          <option value="35">Comedy</option>
-          <option value="27">Horror</option>
-      </select>
-
-
       <ul className={`menuList ${isMenuOpen ? 'open' : ''}`}>
         <li>
           <Link to="/best-rated" onClick={handleMenuToggle} className="navLink">Best rated</Link>
         </li>
-        <Link to="/" onClick={handleMenuToggle} className="navLink">Categories</Link>
+
+        <div>
+      <div className="dropdown">
+        <div className="dropdown-header" onClick={toggleOptions}>
+          {selectedOption ? selectedOption.label : 'Categories'}
+        </div>
+        {showOptions &&
+          <div className="dropdown-options">
+            <div className="dropdown-option" onClick={(event) => handleCategory(event, { value: 28, label: 'Action' })}>
+              Action
+            </div>
+            <div className="dropdown-option" onClick={(event) => handleCategory(event, { value: 35, label: 'Comedy' })}>
+              Comedy
+            </div>
+            <div className="dropdown-option" onClick={(event) => handleCategory(event, { value: 27, label: 'Horror' })}>
+              Horror
+            </div>
+          </div>
+        }
+      </div>
+    </div>
       </ul>
+  
 
       <ul className='navBarList'>
       <i className="fa fa-search fa-lg"></i>
@@ -66,7 +85,6 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory }) => 
 };
 
 export default Navbar;
-
 
 
 
