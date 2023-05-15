@@ -8,16 +8,18 @@ import './ShoppingCartMovie.css';
 
 
 const ShoppingCartMovie = ({ props }) => {
-
     const dispatch = useDispatch();
     //Skapa en + & - dispatcher
 
     const incrementMovieAmount = () => {
-        dispatch(increaseAmount({props} ));
+        dispatch(increaseAmount(props));
     };
 
     const decreaseMovieAmount = () => {
-        dispatch(decreaseAmount( {props} ));
+        dispatch(decreaseAmount(props));
+        if (props.count <= 1) {
+            removeFromCartHandler()
+        }
     };
 
 

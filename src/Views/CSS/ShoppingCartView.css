@@ -109,7 +109,7 @@
 
 @media (max-width: 700px) {
   .checkoutInputField .total {
-    margin-right: 10px;
+    margin-right: 20px;
   }
   
   .checkoutInputField h3 {
@@ -126,12 +126,15 @@
 .checkoutInputField form input[type="text"],
 .checkoutInputField form input[type="email"],
 .checkoutInputField form input[type="tel"] {
- 
+  width: 55vw;
+}
+
+.confirmation-button, .clear-cart-button {
   width: 55vw;
 }
     
 }
-/* width: 50vw; */
+
 
 
 

@@ -56,6 +56,23 @@ function App() {
     fetchMoviesData();
   }, []);
 
+  const fetchBestRatedData = async (bestRated) => {
+    setLoading(true);
+    const moviesData = await apiFetcher(null, pageNumber, null, null, bestRated);
+
+    if (pageNumber > 1) {
+      setMovies([...movies, ...moviesData.results])
+    } else {
+      setMovies(moviesData.results);
+    }
+    setLoading(false);
+  };  
+
+  useEffect(() => {
+    fetchMoviesData();
+  }, []);
+  
+
   const handleSubmit = async (e) => {
     setMovies([]);
     setPageNumber(1);
@@ -67,9 +84,10 @@ function App() {
     setMovies([]);
     setPageNumber(1);
     e.preventDefault();
-    fetchCategoriesData(category);
+    const categoryId = category.value; // extract the category value
+    fetchCategoriesData(categoryId);
   };
-
+  
   
   //Scroll event listener 
   useEffect(() => {
@@ -88,7 +106,8 @@ function App() {
       handleSubmit={handleSubmit}
       setSearchTerm={setSearchTerm}
       apiFetcher={apiFetcher}
-      fetchMoviesData={fetchMoviesData} />
+      fetchMoviesData={fetchMoviesData}
+      fetchBestRatedData={fetchBestRatedData} />
       <Routes>
         <Route
           path="/"
