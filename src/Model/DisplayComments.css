@@ -4,19 +4,20 @@
     margin-bottom: 10px;
     border-radius: 5px;
   }
+
+  .commentInfoContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .commentUpvotesContainer {
+    display: flex;
+  }
   
   .commentsContainer:nth-child(odd) {
     background-color: #e8e8e8;
   }
-  
-  .commentName, .commentComment, .commentUpvotes {
-    margin: 5px 0;
-    font-size: 16px;
-  }
 
-  .commentName, .commentUpvotes {
-    text-align: center;
-  }
 
   .commentComment {
     margin: 10px 0;
@@ -26,7 +27,26 @@
     box-shadow: 2px 2px 2px 2px;
   }
   
-  .commentName p, .commentComment p, .commentUpvotes p {
-    margin: 0;
+  .commentName p, .commentComment p, #commentUpvotes {
+    margin: 0px;
   }
-  
+
+  .commentThumbs {
+    margin: 3px 5px 0px 5px;
+  }
+
+  .commentThumbs:hover {
+    cursor: pointer;
+  }
+
+  .fa-thumbs-up {
+   
+  }
+
+  .fa-thumbs-down {
+
+  }
+
+  .voted {
+    color: #a12f36;
+  }
