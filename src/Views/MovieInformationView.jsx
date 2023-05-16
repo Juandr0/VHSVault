@@ -97,18 +97,24 @@ const MovieInformationView = () => {
                         posterWidth={posterWidth}
                         runPriceAlgoritm={true}
                     />
+
+                </div>
+                <hr/>
+                <div className='movieCommentsContainer'>
+                    
+                <h3>User comments</h3>
                     <div className='readCommentsContainer'>
-                        <h3>User comments</h3>
+                    
                         {comments.map((comment, index) => (
 
                             <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId} />
                         ))}
                     </div>
-                </div>
-
-                <div className='newCommentContainer'>
-                    <h3>Add a new comment</h3>
-                    <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />
+                  
+                    <div className='newCommentContainer'>
+                        <h3>Add a new comment</h3>
+                        <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />
+                    </div>
                 </div>
             </div>
 
