@@ -8,7 +8,7 @@ import CreateNewComment from '../Model/CreateNewComment';
 import DisplayComments from '../Model/DisplayComments';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, setDoc, getDoc, addDoc, getDocs} from "firebase/firestore";
+import { collection, query, where, onSnapshot, doc, setDoc, getDoc, addDoc, getDocs } from "firebase/firestore";
 
 const MovieInformationView = () => {
     const location = useLocation();
@@ -47,13 +47,19 @@ const MovieInformationView = () => {
 
     const fetchCommentsFromDB = async () => {
         let commentsList = [];
-
         try {
-            const querySnapshot = await getDocs(collection(db, "movies", providedMovieId, "comments"));
-            querySnapshot.forEach((doc) => {
-                commentsList.push({ID: doc.id, ...doc.data()});
+            //Listener for DB-changes
+            const unsubscribe = onSnapshot(collection(db, "movies", providedMovieId, "comments"), (querySnapshot) => {
+
+                // Reset the comments list
+                commentsList = [];
+
+                // Fetches new data
+                querySnapshot.forEach((doc) => {
+                    commentsList.push({ ID: doc.id, ...doc.data() });
+                });
+                setComments(commentsList);
             });
-            setComments(commentsList);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -93,11 +99,11 @@ const MovieInformationView = () => {
                         runPriceAlgoritm={true}
                     />
                     <div className='readCommentsContainer'>
-                          <h3>User comments</h3>
-                            {comments.map((comment, index) => (
-                                
-                                <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId}/>
-                            ))}
+                        <h3>User comments</h3>
+                        {comments.map((comment, index) => (
+
+                            <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId} />
+                        ))}
                     </div>
                 </div>
 
