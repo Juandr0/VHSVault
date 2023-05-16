@@ -75,7 +75,7 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetch
       </form>
         <li>
           <Link to="/cart">
-            <i className="fa fa-shopping-cart"></i>
+          <i className="fa fa-shopping-cart"></i>
             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
           </Link> 
         </li>

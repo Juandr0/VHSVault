@@ -8,7 +8,7 @@ import CreateNewComment from '../Model/CreateNewComment';
 import DisplayComments from '../Model/DisplayComments';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, setDoc, getDoc, addDoc, getDocs, where } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc, addDoc, getDocs} from "firebase/firestore";
 
 const MovieInformationView = () => {
     const location = useLocation();
@@ -51,14 +51,13 @@ const MovieInformationView = () => {
         try {
             const querySnapshot = await getDocs(collection(db, "movies", providedMovieId, "comments"));
             querySnapshot.forEach((doc) => {
-                commentsList.push(doc.data());
+                commentsList.push({ID: doc.id, ...doc.data()});
             });
             setComments(commentsList);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
     };
-
 
 
     useEffect(() => {
@@ -96,7 +95,8 @@ const MovieInformationView = () => {
                     <div className='readCommentsContainer'>
                           <h3>User comments</h3>
                             {comments.map((comment, index) => (
-                                <DisplayComments comment={comment} key={index}/>
+                                
+                                <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId}/>
                             ))}
                     </div>
                 </div>
