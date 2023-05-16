@@ -38,3 +38,15 @@
   .commentThumbs:hover {
     cursor: pointer;
   }
+
+  .fa-thumbs-up {
+   
+  }
+
+  .fa-thumbs-down {
+
+  }
+
+  .voted {
+    color: #a12f36;
+  }

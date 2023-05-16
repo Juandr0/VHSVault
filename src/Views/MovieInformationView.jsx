@@ -75,7 +75,6 @@ const MovieInformationView = () => {
     }, [location.pathname]);
 
     useEffect(() => {
-
         if (!movie) {
             const fetchMovieData = async () => {
                 const movieData = await apiFetcher(null, null, providedMovieId);
