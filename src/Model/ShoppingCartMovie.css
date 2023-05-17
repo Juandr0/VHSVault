@@ -13,6 +13,7 @@ input[type=number]{
 .shoppingCartMovieContainer {
     display: flex;
     width: 60vw;
+    max-width: 650px;
     margin-bottom: 15px;
     border-bottom: 1px solid rgb(229, 229, 229);
 }
