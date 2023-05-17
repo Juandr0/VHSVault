@@ -5,11 +5,20 @@ import { Link, Route, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartCount } from '../features/cartSlice';
 
-const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetchBestRatedData }) => {
+const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetchBestRatedData, fetchMoviesData }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
   const cartCount = useSelector(selectCartCount);
+  const navigate = useNavigate();
+
+const handleHomeClick = () => {
+  // Make the API fetch
+  fetchMoviesData(searchTerm);
+  
+  // Navigate to the home page
+  navigate('/');
+};
 
   function toggleOptions() {
     setShowOptions(!showOptions);
@@ -37,9 +46,11 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetch
       </div>
 
       <ul className='navBarList'>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
+      <li>
+        <Link to="/" onClick={handleHomeClick}>
+        <i className="fa fa-home"></i>
+        </Link>
+      </li>
       </ul>
 
       <ul className={`menuList ${isMenuOpen ? 'open' : ''}`}>
