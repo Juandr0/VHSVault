@@ -12,7 +12,7 @@ const MovieCard = ({ movie, index }) => {
   const posterWidth = 150;
 
   return (
-    <ShoppingCartMovie props={movie} />
+    <ShoppingCartMovie props={movie} showButtons={true} />
   )
 }
 
