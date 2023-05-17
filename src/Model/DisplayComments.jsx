@@ -5,6 +5,7 @@ import { doc, updateDoc } from "firebase/firestore";
 
 const DisplayComments = ({ comment, movieID, db }) => {
 
+    const [showComment, setShowComment] = useState(comment.upvotes > 0);
     const [userVote, setUserVote] = useState("");
     const [thumbsUpColor, setThumbsUpColor] = useState('fa fa-thumbs-up commentThumbs');
     const [thumbsDownColor, setThumbsDownColor] = useState('fa fa-thumbs-down commentThumbs');
@@ -56,11 +57,30 @@ const DisplayComments = ({ comment, movieID, db }) => {
                     <i className={thumbsDownColor} onClick={downVoteHandler}></i>
                     <p id="commentUpvotes">{comment.upvotes}</p>
                     <i className={thumbsUpColor} onClick={upVoteHandler}></i>
-
                 </div>
+                {
+                    showComment ? 
+                    <i className={"fa fa-minus hideComment"} onClick={() => {setShowComment(!showComment)} } title={"Click to hide comment"}></i> : 
+                    <i className={"fa fa-plus showComment"} onClick={() => {setShowComment(!showComment)}} title={"Click to show comment"}></i>
+                }
 
             </div>
-            <div className="commentComment"><p>{comment.comment}</p></div>
+
+            {showComment ?
+                <div className="commentComment">
+                    <p>{comment.comment}</p>
+                </div>
+                :
+
+                comment.upvotes < 0 ? 
+                <div className="commentComment">
+                    <p>This comment has received too many downvotes and has been hidden. To view the comment, click the "+" button.</p>
+                </div> 
+                :
+                <div className=" ">
+                    <p>Comment hidden.</p>
+                </div> 
+            }
         </div>
     );
 }

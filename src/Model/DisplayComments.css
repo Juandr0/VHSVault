@@ -1,4 +1,6 @@
 .commentsContainer {
+    box-sizing: border-box;
+    position: relative;
     background-color: #f5f5f5;
     padding: 10px;
     margin-bottom: 10px;
@@ -12,12 +14,10 @@
 
   .commentUpvotesContainer {
     display: flex;
+    margin-left: auto;
+    margin-right: 15px;
   }
   
-  .commentsContainer:nth-child(odd) {
-    background-color: #e8e8e8;
-  }
-
 
   .commentComment {
     margin: 10px 0;
@@ -26,6 +26,7 @@
     padding: 10px;
     box-shadow: 2px 2px 2px 2px;
   }
+
   
   .commentName p, .commentComment p, #commentUpvotes {
     margin: 0px;
@@ -33,20 +34,36 @@
 
   .commentThumbs {
     margin: 3px 5px 0px 5px;
+    
   }
 
   .commentThumbs:hover {
     cursor: pointer;
   }
 
-  .fa-thumbs-up {
-   
-  }
-
-  .fa-thumbs-down {
-
-  }
 
   .voted {
     color: #a12f36;
   }
+
+.hideComment, 
+.showComment {
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: #a12f36;
+}
+
+.hideComment {
+  
+}
+
+.showComment {
+
+}
+
+.hideComment, .showComment:hover {
+  cursor: pointer;
+
+}
