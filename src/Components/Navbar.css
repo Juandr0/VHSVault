@@ -15,6 +15,14 @@
     margin-bottom: 50px;
   }
 
+  .dropdown-header {
+    cursor: pointer;
+  }
+
+  .dropdown-options {
+    cursor: pointer;
+  }
+
   .cart-count {
     background-color: red;
     color: white;
@@ -23,12 +31,9 @@
     border-radius: 50%;
   }
   
-  
-
   .best-rated {
-
+    cursor: pointer;
     margin-right: 30px;
-
   }
 
   .select-container {
