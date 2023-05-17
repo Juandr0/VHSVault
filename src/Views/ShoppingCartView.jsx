@@ -9,10 +9,10 @@ import { useState } from "react";
 const MovieCard = ({ movie, index }) => {
   const dispatch = useDispatch();
   const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
-  const posterWidth = 200;
+  const posterWidth = 150;
 
   return (
-    <ShoppingCartMovie props={movie} showButtons={true} />
+    <ShoppingCartMovie props={movie} />
   )
 }
 
@@ -66,7 +66,7 @@ const ShoppingCartView = () => {
             <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
               Place Order
             </Link>
-            
+          
           </div>
 
         </div>
