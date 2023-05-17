@@ -27,6 +27,14 @@
     box-shadow: 2px 2px 2px 2px;
   }
 
+  .commentHiddenComment {
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.127);
+    border-radius: 5px;
+    padding: 0px 3px;
+    box-shadow: 2px 2px 2px 2px;
+  }
+
   
   .commentName p, .commentComment p, #commentUpvotes {
     margin: 0px;

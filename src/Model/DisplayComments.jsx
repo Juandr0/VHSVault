@@ -59,6 +59,7 @@ const DisplayComments = ({ comment, movieID, db }) => {
                     <i className={thumbsUpColor} onClick={upVoteHandler}></i>
                 </div>
                 {
+                    //Shows plus-sign or minus-sign depending on showComment state
                     showComment ? 
                     <i className={"fa fa-minus hideComment"} onClick={() => {setShowComment(!showComment)} } title={"Click to hide comment"}></i> : 
                     <i className={"fa fa-plus showComment"} onClick={() => {setShowComment(!showComment)}} title={"Click to show comment"}></i>
@@ -66,18 +67,23 @@ const DisplayComments = ({ comment, movieID, db }) => {
 
             </div>
 
+
+
             {showComment ?
                 <div className="commentComment">
                     <p>{comment.comment}</p>
                 </div>
                 :
 
+
+                //Second ternary displays two different messages depending on if the 
+                //user manually hides the comment or if the comment has too many downvotes.
                 comment.upvotes < 0 ? 
-                <div className="commentComment">
+                <div className="commentHiddenComment">
                     <p>This comment has received too many downvotes and has been hidden. To view the comment, click the "+" button.</p>
                 </div> 
                 :
-                <div className=" ">
+                <div className="commentHiddenComment">
                     <p>Comment hidden.</p>
                 </div> 
             }
