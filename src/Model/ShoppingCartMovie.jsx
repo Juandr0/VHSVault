@@ -54,8 +54,10 @@ const ShoppingCartMovie = ({ props }) => {
                                     />
                                 </label>
                                 <button onClick={incrementMovieAmount} className='cartButtonPlus'>+</button>
+                          
                             </div>
-                            <p className="cartMoviePrice">${(props.price * props.count).toFixed(2)}</p>
+                            <i className="fa fa-trash-o cartTrash" onClick={removeFromCartHandler}/>
+                            <p className="cartMoviePrice" >${(props.price * props.count).toFixed(2)}</p>
                         </div>
                     </div>
                 </div>
