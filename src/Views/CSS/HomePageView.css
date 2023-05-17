@@ -4,3 +4,11 @@
     flex-wrap: wrap;
 }
 
+@media (max-width: 340px) {
+    .home_movieGridContainer {
+        margin: 100px auto 0px;
+        display: block;
+    }
+
+}
+
