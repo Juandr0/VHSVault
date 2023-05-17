@@ -4,6 +4,7 @@ import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlic
 import { setOrderDetails } from "../features/orderSlice";
 import './CSS/ShoppingCartView.css';
 import ShoppingCartMovie from '../Model/ShoppingCartMovie';
+import { useState } from "react";
 
 const MovieCard = ({ movie, index }) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const ShoppingCartView = () => {
   return (
     <div>
     <h2 id="shoppingCartCheckout">Checkout</h2>
-    <div className="shopping-cart">
+    <div className={cartItems.length === 0 ? '' : 'shopping-cart'}>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -65,7 +66,7 @@ const ShoppingCartView = () => {
             <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
               Place Order
             </Link>
-            <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
+            
           </div>
 
         </div>

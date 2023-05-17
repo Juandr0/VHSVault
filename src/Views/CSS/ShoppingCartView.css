@@ -9,18 +9,19 @@
   display: flex;
   flex-direction: column;
   width: 63.5vw;
+  max-width: 700px;
 }
 
 .checkoutContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
   width: 100%;
 }
 
 .checkoutInputField {
   width: 60vw;
+  max-width: 650px;
   display: flex;
   flex-direction: column;
 }
@@ -43,12 +44,14 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.53);
 }
 
-.checkoutInputField .confirmation-button {
-  background-color: #4CAF50;
+.confirmation-button {
+  align-self: center;
+  width: 350px;
+  background-color: #b71d27;
   color: white;
   padding: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   margin-top: 20px;
   text-align: center;
   text-decoration: none;
@@ -57,27 +60,11 @@
   transition: background-color 0.3s ease;
 }
 
-.checkoutInputField .confirmation-button:hover {
-  background-color: #3e8e41;
-}
-
-.checkoutInputField .clear-cart-button {
-  background-color: #f44336;
+.confirmation-button:hover {
+  background-color: #cf464fc8;
   color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.checkoutInputField .clear-cart-button:hover {
-  background-color: #f44336;
-}
 
 .checkoutInputField form {
   display: flex;
@@ -108,6 +95,9 @@
 }
 
 @media (max-width: 700px) {
+  .confirmation-button {
+    width: 250px;
+  }
   .checkoutInputField .total {
     margin-right: 20px;
   }
@@ -129,19 +119,21 @@
   width: 55vw;
 }
 
-.confirmation-button, .clear-cart-button {
-  width: 55vw;
-}
-    
+
 }
 
 
 
 
 
-@media (max-width: 400px) {
+@media (max-width: 455px) {
   .shopping-cart {
     width: 70vw;
+    max-width: 300px;
+  }
+
+  .confirmation-button {
+    width: 200px;
   }
 }
 

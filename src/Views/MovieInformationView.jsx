@@ -8,7 +8,7 @@ import CreateNewComment from '../Model/CreateNewComment';
 import DisplayComments from '../Model/DisplayComments';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, setDoc, getDoc, addDoc, getDocs, where } from "firebase/firestore";
+import { collection, query, where, onSnapshot, doc, setDoc, getDoc, addDoc, getDocs } from "firebase/firestore";
 
 const MovieInformationView = () => {
     const location = useLocation();
@@ -47,18 +47,26 @@ const MovieInformationView = () => {
 
     const fetchCommentsFromDB = async () => {
         let commentsList = [];
-
         try {
-            const querySnapshot = await getDocs(collection(db, "movies", providedMovieId, "comments"));
-            querySnapshot.forEach((doc) => {
-                commentsList.push(doc.data());
+            //Listener for DB-changes
+            const unsubscribe = onSnapshot(collection(db, "movies", providedMovieId, "comments"), (querySnapshot) => {
+
+                // Reset the comments list
+                commentsList = [];
+
+                // Fetches new data
+                querySnapshot.forEach((doc) => {
+                    commentsList.push({ ID: doc.id, ...doc.data() });
+                });
+                // Sort commentsList array based on upvotes value
+                commentsList.sort((a, b) => b.upvotes - a.upvotes);
+
+                setComments(commentsList);
             });
-            setComments(commentsList);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
     };
-
 
 
     useEffect(() => {
@@ -70,7 +78,6 @@ const MovieInformationView = () => {
     }, [location.pathname]);
 
     useEffect(() => {
-
         if (!movie) {
             const fetchMovieData = async () => {
                 const movieData = await apiFetcher(null, null, providedMovieId);
@@ -93,17 +100,23 @@ const MovieInformationView = () => {
                         posterWidth={posterWidth}
                         runPriceAlgoritm={true}
                     />
-                    <div className='readCommentsContainer'>
-                          <h3>User comments</h3>
-                            {comments.map((comment, index) => (
-                                <DisplayComments comment={comment} key={index}/>
-                            ))}
-                    </div>
-                </div>
 
-                <div className='newCommentContainer'>
-                    <h3>Add a new comment</h3>
-                    <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />
+                </div>
+                <hr/>
+                <div className='movieCommentsContainer'>
+                    
+                <h3>User comments</h3>
+                    <div className='readCommentsContainer'>
+                        {comments.map((comment, index) => (
+
+                            <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId} />
+                        ))}
+                    </div>
+                  
+                    <div className='newCommentContainer'>
+                        <h3>Add a new comment</h3>
+                        <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />
+                    </div>
                 </div>
             </div>
 
