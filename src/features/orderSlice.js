@@ -9,7 +9,8 @@ const orderSlice = createSlice({
     phone: '',
     items: [],
     total: 0,
-    orderDetails: {}
+    orderDetails: {},
+    //image: null,
   },
   reducers: {
     setOrderDetails: (state, action) => {
@@ -20,6 +21,7 @@ const orderSlice = createSlice({
       state.items = action.payload.items;
       state.total = action.payload.total;
       state.orderDetails = action.payload;
+      //state.image = action.payload.image;
     },
   },
 });

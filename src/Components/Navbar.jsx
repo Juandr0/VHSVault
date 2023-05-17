@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import './Navbar.css';
 import '../App.css';
 import { Link, Route, NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCartCount } from '../features/cartSlice';
 
 const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetchBestRatedData }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
+  const cartCount = useSelector(selectCartCount);
 
   function toggleOptions() {
     setShowOptions(!showOptions);
@@ -72,7 +75,8 @@ const Navbar = ({ handleSubmit, searchTerm, setSearchTerm, handleCategory, fetch
       </form>
         <li>
           <Link to="/cart">
-            <i className="fa fa-shopping-cart"></i>
+          <i className="fa fa-shopping-cart"></i>
+            {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
           </Link> 
         </li>
       </ul>

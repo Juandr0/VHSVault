@@ -1,0 +1,59 @@
+.order-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  max-width: 600px;
+  padding: 20px;
+  border: 2px solid #a12f36;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-top: 100px;
+}
+
+.order-confirmation h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.order-confirmation p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.order-confirmation ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.order-confirmation li {
+  margin: 5px 0;
+}
+
+@media screen and (max-width: 340px) {
+  .order-confirmation {
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .order-confirmation h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .order-confirmation p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .order-confirmation {
+    max-width: 800px;
+    margin-top: 50px;
+  }
+}
+
+
+  
