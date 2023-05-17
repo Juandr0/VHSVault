@@ -5,7 +5,7 @@ import { doc, updateDoc } from "firebase/firestore";
 
 const DisplayComments = ({ comment, movieID, db }) => {
 
-    const [showComment, setShowComment] = useState(comment.upvotes > 0);
+    const [showComment, setShowComment] = useState(comment.upvotes >= 0);
     const [userVote, setUserVote] = useState("");
     const [thumbsUpColor, setThumbsUpColor] = useState('fa fa-thumbs-up commentThumbs');
     const [thumbsDownColor, setThumbsDownColor] = useState('fa fa-thumbs-down commentThumbs');
