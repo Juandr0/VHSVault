@@ -61,6 +61,12 @@ input[type=number]{
     border: none;
     border-right: 1px solid rgba(128, 128, 128, 0.53);
 }
+
+.cartTrash {
+    margin-left: 10px;
+    font-size: 1.7em;
+   
+}
 .cartMoviePrice {
     margin-left: auto;
 }
@@ -80,10 +86,11 @@ outline: none;
 
 
 /* Hover effects */
-.cartAmountContainer button:hover {
-    color: #3498db;
+.cartAmountContainer button:hover, .cartTrash:hover{
+    color: #a12f36;
     outline: none;
 }
+
 
 .cartButtonPlus:hover{
     border-left: 1px solid rgba(128, 128, 128, 0.53);
