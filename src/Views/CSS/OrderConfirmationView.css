@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin: 50px auto;
-  max-width: 600px; 
+  max-width: 600px;
   padding: 20px;
   border: 2px solid #a12f36;
   border-radius: 8px;
@@ -17,10 +17,9 @@
 }
 
 .order-confirmation p {
-  font-size: 1rem; 
+  font-size: 1rem;
   margin-bottom: 10px;
 }
-
 
 .order-confirmation ul {
   list-style-type: none;
@@ -30,6 +29,30 @@
 
 .order-confirmation li {
   margin: 5px 0;
+}
+
+@media screen and (max-width: 340px) {
+  .order-confirmation {
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .order-confirmation h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .order-confirmation p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .order-confirmation {
+    max-width: 800px;
+    margin-top: 50px;
+  }
 }
 
 
