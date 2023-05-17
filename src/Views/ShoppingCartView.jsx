@@ -66,7 +66,7 @@ const ShoppingCartView = () => {
             <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
               Place Order
             </Link>
-            <button className="clear-cart-button" onClick={clearCartHandler}>Clear Cart</button>
+            
           </div>
 
         </div>
