@@ -58,6 +58,9 @@ const MovieInformationView = () => {
                 querySnapshot.forEach((doc) => {
                     commentsList.push({ ID: doc.id, ...doc.data() });
                 });
+                // Sort commentsList array based on upvotes value
+                commentsList.sort((a, b) => b.upvotes - a.upvotes);
+
                 setComments(commentsList);
             });
         } catch (error) {
@@ -104,7 +107,6 @@ const MovieInformationView = () => {
                     
                 <h3>User comments</h3>
                     <div className='readCommentsContainer'>
-                    
                         {comments.map((comment, index) => (
 
                             <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId} />
