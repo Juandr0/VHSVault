@@ -18,7 +18,9 @@ const ShoppingCartMovie = ({ props, showButtons }) => {
         removeFromCartHandler();
       }
     };
-  
+
+
+
     const removeFromCartHandler = () => {
       dispatch(removeFromCart(props.title));
     };
