@@ -29,9 +29,21 @@ const Navbar = ({
     navigate('/');
   };
 
-  function toggleOptions() {
-    setShowOptions(!showOptions);
-  }
+  const handleCategoryClick = (event, category) => {
+    setIsMenuOpen(false);
+    handleCategory(event, category);
+    setShowOptions(false);
+  };
+  
+  const handleBestRatedClick = () => {
+    setIsMenuOpen(false);
+    fetchBestRatedData(fetchBestRatedData);
+  };
+
+  const toggleOptions = () => {
+    setShowOptions((prevShowOptions) => !prevShowOptions);
+  };
+  
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -60,38 +72,36 @@ const Navbar = ({
           {isMenuOpen ? 'Home' : <i className="fa fa-home fa-lg"></i>}
         </Link>
   
-        <div className='best-rated' onClick={fetchBestRatedData}>
+        <div className='best-rated' onClick={handleBestRatedClick}>
           Best Rated
         </div>
 
-        <div className="dropdown">
-          <div className="dropdown-header" onClick={toggleOptions}>
-            {selectedOption ? selectedOption.label : 'Categories'}
-          </div>
-          {showOptions && (
-            <div className="dropdown-options">
-              <div
-                className="dropdown-option"
-                onClick={(event) => handleCategory(event, { value: 28, label: 'Action' })}
-              >
-                Action
-              </div>
-              <div
-                className="dropdown-option"
-                onClick={(event) => handleCategory(event, { value: 35, label: 'Comedy' })}
-              >
-                Comedy
-              </div>
-              <div
-                className="dropdown-option"
-                onClick={(event) => handleCategory(event, { value: 27, label: 'Horror' })}
-              >
-                Horror
-              </div>
-            </div>
-          )}
-        </div>
-      </ul>
+        <div className={`dropdown ${showOptions ? 'open' : ''}`}>
+  <div className="dropdown-header" onClick={toggleOptions}>
+    {selectedOption ? selectedOption.label : 'Categories'}
+  </div>
+  <div className="dropdown-options">
+    <div
+      className="dropdown-option"
+      onClick={(event) => handleCategoryClick(event, { value: 28, label: 'Action' })}
+    >
+      Action
+    </div>
+    <div
+      className="dropdown-option"
+      onClick={(event) => handleCategoryClick(event, { value: 35, label: 'Comedy' })}
+    >
+      Comedy
+    </div>
+    <div
+      className="dropdown-option"
+      onClick={(event) => handleCategoryClick(event, { value: 27, label: 'Horror' })}
+    >
+      Horror
+    </div>
+  </div>
+  </div>
+    </ul>
 
       <ul className='navBarList'>
         <i className="fa fa-search fa-lg"></i>
