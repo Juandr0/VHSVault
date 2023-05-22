@@ -11,6 +11,7 @@ const OrderConfirmationView = () => {
     <div className="order-confirmation">
       <h2>Thank you for your order!</h2>
       <p>Here are your order details:</p>
+      <p> Order number: {orderDetails.orderNumber}</p>
       <p>Name: {orderDetails.name}</p>
       <p>Email: {orderDetails.email}</p>
       <p>Address: {orderDetails.address}</p>

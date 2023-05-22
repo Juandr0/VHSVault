@@ -4,31 +4,77 @@ import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlic
 import { setOrderDetails } from "../features/orderSlice";
 import './CSS/ShoppingCartView.css';
 import ShoppingCartMovie from '../Model/ShoppingCartMovie';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import FirebaseConfig from "../Components/FireBaseConfig";
+import { setDoc, doc, getDoc } from "firebase/firestore";
+
 
 const MovieCard = ({ movie, index }) => {
   const dispatch = useDispatch();
   const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
   const posterWidth = 150;
-
+  const db = FirebaseConfig.getFirestoreInstance();
   return (
     <ShoppingCartMovie props={movie} showButtons={true} />
   )
 }
 
 const ShoppingCartView = () => {
+  const [orderNumber, setOrderNumber] = useState('');
   const cartItems = useSelector(selectCartItems);
   const total = cartItems.reduce((acc, curr) => acc + curr.price * curr.count, 0);
   const dispatch = useDispatch();
   const clearCartHandler = () => dispatch(clearCart());
-  const placeOrderHandler = () => {
+  const db = FirebaseConfig.getFirestoreInstance();
+
+
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      const orderNumber = await fetchOrderNumber();
+      setOrderNumber(orderNumber);
+    };
+  
+    fetchData();
+  }, []);
+  
+
+
+  const placeOrderHandler = async () => {
+
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
-    dispatch(setOrderDetails({ name, email, address, phone, items: cartItems, total }));
+    incrementDBOrderNumber();
+    dispatch(setOrderDetails({orderNumber, name, email, address, phone, items: cartItems, total }));
     clearCartHandler();
   };
+
+  const fetchOrderNumber = async () => {
+
+    const docRef = doc(db, "orders", "orderNumber")
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("orderNR")
+      const dataAsString = JSON.stringify(docSnap.data().nextNumber);
+      return (dataAsString)
+   
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    
+  }
+
+
+
+  const incrementDBOrderNumber = () => {
+    const docRef = doc(db, "orders", "orderNumber");
+    const newOrderNumber = (parseInt(orderNumber) + 1);
+    setDoc(docRef, { nextNumber : newOrderNumber })
+  }
 
   return (
     <div>
