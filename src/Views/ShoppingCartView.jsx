@@ -57,14 +57,10 @@ const ShoppingCartView = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("orderNR")
       const dataAsString = JSON.stringify(docSnap.data().nextNumber);
       return (dataAsString)
    
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
-    }
+    } 
     
   }
 
