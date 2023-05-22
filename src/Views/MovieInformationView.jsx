@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from 'react';
 import Error404Message from '../Components/Error404Message';
 import CreateNewComment from '../Model/CreateNewComment';
 import DisplayComments from '../Model/DisplayComments';
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, query, where, onSnapshot, doc, setDoc, getDoc, addDoc, getDocs } from "firebase/firestore";
+import FirebaseConfig from '../Components/FireBaseConfig';
+
+import { collection, onSnapshot, addDoc} from "firebase/firestore";
 
 const MovieInformationView = () => {
     const location = useLocation();
@@ -17,18 +17,7 @@ const MovieInformationView = () => {
     const [movie, setMovie] = useState(location.state?.movie);
     const providedMovieId = location.pathname.split('/')[2];
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyAj9jcY-K4uZslJ1IMJYobgwWFRNYhEVTY",
-        authDomain: "webbshop-d762c.firebaseapp.com",
-        projectId: "webbshop-d762c",
-        storageBucket: "webbshop-d762c.appspot.com",
-        messagingSenderId: "701571660328",
-        appId: "1:701571660328:web:0cf4bf9b02bd7265ccd31d"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
+    const db = FirebaseConfig.getFirestoreInstance();
 
 
     const addCommentToDB = async (inputName, inputComment, providedMovieId) => {

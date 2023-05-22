@@ -21,7 +21,11 @@ const ShoppingCartView = () => {
   const total = cartItems.reduce((acc, curr) => acc + curr.price * curr.count, 0);
   const dispatch = useDispatch();
   const clearCartHandler = () => dispatch(clearCart());
+
+  const currentOrderNumber = fetchOrderNumber;
+
   const placeOrderHandler = () => {
+    const orderNumber = currentOrderNumber;
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const address = document.getElementById('address').value;
@@ -29,6 +33,14 @@ const ShoppingCartView = () => {
     dispatch(setOrderDetails({ name, email, address, phone, items: cartItems, total }));
     clearCartHandler();
   };
+
+  const fetchOrderNumber = () => {
+
+  }
+
+  const incrementDBOrderNumber = () => {
+    
+  }
 
   return (
     <div>
