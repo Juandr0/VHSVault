@@ -11,6 +11,23 @@
   right: 0;
   z-index: 999;
   padding: 0 20px;
+  margin-bottom: 50px;
+}
+
+.navBarIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a12f36;
+  color: #ebebeb;
+  max-width: 2000px;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 0 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 50px;
 }
@@ -48,7 +65,7 @@
   cursor: pointer;
   color: #ebebeb;
   font-size: large;
-  margin-left: 20px;
+  margin-left: 0;
 }
 
 .dropdown-options {
@@ -56,6 +73,7 @@
   top: calc(100% + 5px);
   left: 0;
   width: 100%;
+  max-width: 89px;
   background-color: rgba(161, 47, 54, 0.8);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -64,6 +82,7 @@
   padding: 10px;
   visibility: hidden;
   opacity: 0;
+  margin-top: 10px;
   transform: translateY(-10px);
   transition: visibility 0s, opacity 0.3s, transform 0.3s;
 }
@@ -136,6 +155,7 @@
 
 .menu-link-hamburger {
   color: #ebebeb; /* Color for the link inside the hamburger menu */
+  font-size: large;
 }
 
 .menuToggle {
@@ -215,7 +235,7 @@
   position: fixed;
   top: 54px;
   left: 0;
-  width: 35%;
+  width: 40%;
   height: calc(40% - 10px);
   padding: 20px;
   background-color: rgba(161, 47, 54, 0.8);
@@ -247,6 +267,17 @@
 @media (min-width: 768px) {
   .navBarList {
     margin: 0;
+  }
+
+  .dropdown-header {
+    cursor: pointer;
+    color: #ebebeb;
+    font-size: large;
+    margin-left: 15px;
+  }
+
+  .dropdown-options {
+    margin-left: 15px;
   }
 
   .fa-search {
