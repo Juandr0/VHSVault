@@ -17,7 +17,6 @@ const OrderConfirmationView = () => {
       <p>Address: {orderDetails.address}</p>
       <p>Phone: {orderDetails.phone}</p>
       <p>Total: ${orderDetails.total.toFixed(2)}</p>
-      <p>Movies:</p>
       <ul>
         {orderDetails.items.map((item, index) => (
           <li key={index}>

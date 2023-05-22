@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlice";
+import {selectCartItems, clearCart } from "../features/cartSlice";
 import { setOrderDetails } from "../features/orderSlice";
 import './CSS/ShoppingCartView.css';
 import ShoppingCartMovie from '../Model/ShoppingCartMovie';
@@ -9,11 +9,6 @@ import FirebaseConfig from "../Components/FireBaseConfig";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
 const MovieCard = ({ movie, index }) => {
-  const dispatch = useDispatch();
-  const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
-  const posterWidth = 150;
-  const db = FirebaseConfig.getFirestoreInstance();
-  
   return (
     <ShoppingCartMovie props={movie} showButtons={true} />
   );
@@ -30,17 +25,21 @@ const ShoppingCartView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (shippingInfo.length > 0) {   
-    
+    if (shippingInfo.length > 0) {
+      // Get the form data
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const address = document.getElementById('address').value;
-      const phone =  document.getElementById('phone').value;
-      
-      setShippingInfo([name, email, address, phone]);
+      const phone = document.getElementById('phone').value;
 
-    } 
+      setShippingInfo([name = name, email = email, address = address, phone = phone])
+      // Save name, email, address, phone in localStorage
+      localStorage.setItem('shippingInfo', JSON.stringify(shippingInfo));
+    }
   }, [shippingInfo]);
+
+  
+
 
   useEffect(() => {
     if (orderNumber !== '') {
