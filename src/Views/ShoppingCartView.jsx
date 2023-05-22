@@ -33,8 +33,8 @@ const ShoppingCartView = () => {
       const phone = document.getElementById('phone').value;
 
       setShippingInfo([name = name, email = email, address = address, phone = phone])
-      // Add the input data from forms to slice here
-
+      // Save name, email, address, phone in localStorage
+      localStorage.setItem('shippingInfo', JSON.stringify(shippingInfo));
     }
   }, [shippingInfo]);
 
@@ -44,7 +44,8 @@ const ShoppingCartView = () => {
   useEffect(() => {
     if (orderNumber !== '') {
       incrementDBOrderNumber();
-
+      const storedShippingInfo = localStorage.getItem('shippingInfo');
+      const orderInfo = storedShippingInfo ? JSON.parse(storedShippingInfo) : [];
       console.log(orderInfo)
 
       dispatch(setOrderDetails({ orderNumber, orderInfo , items: cartItems, total }));
