@@ -4,6 +4,7 @@ import '../App.css';
 import { Link, Route, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartCount } from '../features/cartSlice';
+import logo from '../assets/images/logo.png';
 
 const Navbar = ({
   handleSubmit,
@@ -34,7 +35,7 @@ const Navbar = ({
     handleCategory(event, category);
     setShowOptions(false);
   };
-  
+
   const handleBestRatedClick = () => {
     setIsMenuOpen(false);
     fetchBestRatedData(fetchBestRatedData);
@@ -43,7 +44,6 @@ const Navbar = ({
   const toggleOptions = () => {
     setShowOptions((prevShowOptions) => !prevShowOptions);
   };
-  
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -67,41 +67,40 @@ const Navbar = ({
       </div>
 
       <ul className={`menuList ${isMenuOpen ? 'open' : ''}`}>
-       
         <Link to="/" onClick={handleHomeClick} className={`menu-link ${isMenuOpen ? 'menu-link-hamburger' : ''}`}>
-          {isMenuOpen ? 'Home' : <i className="fa fa-home fa-lg"></i>}
+          {isMenuOpen ? 'Home' : <img src={logo} alt="VHS Vault" className="navbar-logo" />}
         </Link>
-  
+
         <div className='best-rated' onClick={handleBestRatedClick}>
           Best Rated
         </div>
 
         <div className={`dropdown ${showOptions ? 'open' : ''}`}>
-  <div className="dropdown-header" onClick={toggleOptions}>
-    {selectedOption ? selectedOption.label : 'Categories'}
-  </div>
-  <div className="dropdown-options">
-    <div
-      className="dropdown-option"
-      onClick={(event) => handleCategoryClick(event, { value: 28, label: 'Action' })}
-    >
-      Action
-    </div>
-    <div
-      className="dropdown-option"
-      onClick={(event) => handleCategoryClick(event, { value: 35, label: 'Comedy' })}
-    >
-      Comedy
-    </div>
-    <div
-      className="dropdown-option"
-      onClick={(event) => handleCategoryClick(event, { value: 27, label: 'Horror' })}
-    >
-      Horror
-    </div>
-  </div>
-  </div>
-    </ul>
+          <div className="dropdown-header" onClick={toggleOptions}>
+            {selectedOption ? selectedOption.label : 'Categories'}
+          </div>
+          <div className="dropdown-options">
+            <div
+              className="dropdown-option"
+              onClick={(event) => handleCategoryClick(event, { value: 28, label: 'Action' })}
+            >
+              Action
+            </div>
+            <div
+              className="dropdown-option"
+              onClick={(event) => handleCategoryClick(event, { value: 35, label: 'Comedy' })}
+            >
+              Comedy
+            </div>
+            <div
+              className="dropdown-option"
+              onClick={(event) => handleCategoryClick(event, { value: 27, label: 'Horror' })}
+            >
+              Horror
+            </div>
+          </div>
+        </div>
+      </ul>
 
       <ul className='navBarList'>
         <i className="fa fa-search fa-lg"></i>
@@ -114,7 +113,7 @@ const Navbar = ({
           <Link to="/cart">
             <i className="fa fa-shopping-cart"></i>
             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-          </Link> 
+          </Link>
         </li>
       </ul>
     </nav>
@@ -122,6 +121,7 @@ const Navbar = ({
 };
 
 export default Navbar;
+
 
 
 
