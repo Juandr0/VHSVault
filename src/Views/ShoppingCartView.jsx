@@ -1,22 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {selectCartItems, clearCart } from "../features/cartSlice";
-import { setOrderDetails } from "../features/orderSlice";
-import './CSS/ShoppingCartView.css';
-import ShoppingCartMovie from '../Model/ShoppingCartMovie';
+import { selectCartItems, clearCart } from "../features/cartSlice";
+import {
+  setOrderDetails,
+  selectOrderDetails,
+  setName,
+  setEmail,
+  setAddress,
+  setPhone,
+} from "../features/orderSlice";
+import "./CSS/ShoppingCartView.css";
+import ShoppingCartMovie from "../Model/ShoppingCartMovie";
 import { useEffect, useState } from "react";
 import FirebaseConfig from "../Components/FireBaseConfig";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
 const MovieCard = ({ movie, index }) => {
-  return (
-    <ShoppingCartMovie props={movie} showButtons={true} />
-  );
+  return <ShoppingCartMovie props={movie} showButtons={true} />;
 };
 
 const ShoppingCartView = () => {
-  const [shippingInfo, setShippingInfo] = useState([]);
-  const [orderNumber, setOrderNumber] = useState('');
+  const [orderNumber, setOrderNumber] = useState("");
   const cartItems = useSelector(selectCartItems);
   const total = cartItems.reduce((acc, curr) => acc + curr.price * curr.count, 0);
   const dispatch = useDispatch();
@@ -24,33 +28,44 @@ const ShoppingCartView = () => {
   const db = FirebaseConfig.getFirestoreInstance();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (shippingInfo.length > 0) {
-      // Get the form data
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const address = document.getElementById('address').value;
-      const phone = document.getElementById('phone').value;
+  const [name, setNameValue] = useState("");
+  const [email, setEmailValue] = useState("");
+  const [address, setAddressValue] = useState("");
+  const [phone, setPhoneValue] = useState("");
 
-      setShippingInfo([name = name, email = email, address = address, phone = phone])
-      // Save name, email, address, phone in localStorage
-      localStorage.setItem('shippingInfo', JSON.stringify(shippingInfo));
+  useEffect(() => {
+    if (name != "") {
+      dispatch(setName(name));
+      console.log("updated name " + name)
     }
-  }, [shippingInfo]);
 
-  
-
+  }, [name]);
 
   useEffect(() => {
-    if (orderNumber !== '') {
-      incrementDBOrderNumber();
-      const storedShippingInfo = localStorage.getItem('shippingInfo');
-      const orderInfo = storedShippingInfo ? JSON.parse(storedShippingInfo) : [];
-      console.log(orderInfo)
+    if (email != "") {
+      dispatch(setEmail(email));
+    }
+  }, [email]);
 
-      dispatch(setOrderDetails({ orderNumber, orderInfo , items: cartItems, total }));
+  useEffect(() => {
+    if (address != ""){
+      dispatch(setAddress(address));
+    }
+  }, [address]);
+
+  useEffect(() => {
+   if (phone != ""){
+    dispatch(setPhone(phone));
+   }
+  }, [phone]);
+
+  useEffect(() => {
+    if (orderNumber !== "") {
+      incrementDBOrderNumber();
+
+      dispatch(setOrderDetails({ orderNumber, items: cartItems, total }));
       clearCartHandler();
-      navigate('/confirmation');
+      navigate("/confirmation");
     }
   }, [orderNumber]);
 
@@ -79,7 +94,7 @@ const ShoppingCartView = () => {
   return (
     <div>
       <h2 id="shoppingCartCheckout">Checkout</h2>
-      <div className={cartItems.length === 0 ? '' : 'shopping-cart'}>
+      <div className={cartItems.length === 0 ? "" : "shopping-cart"}>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
@@ -91,20 +106,44 @@ const ShoppingCartView = () => {
             </div>
             <div className="checkoutInputField">
               <p className="item-count">
-                {cartItems.reduce((acc, curr) => acc + curr.count, 0)}{' '}
-                {cartItems.reduce((acc, curr) => acc + curr.count, 0) > 1 ? 'items' : 'item'} in the cart
+                {cartItems.reduce((acc, curr) => acc + curr.count, 0)}{" "}
+                {cartItems.reduce((acc, curr) => acc + curr.count, 0) > 1 ? "items" : "item"} in the cart
               </p>
               <p className="total">Total: ${(total).toFixed(2)}</p>
               <h3>Shipping information</h3>
               <form className="checkoutForm" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" required />
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setNameValue(e.target.value)}
+                  required
+                />
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" required />
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmailValue(e.target.value)}
+                  required
+                />
                 <label htmlFor="address">Address</label>
-                <input type="text" id="address" required />
+                <input
+                  type="text"
+                  id="address"
+                  value={address}
+                  onChange={(e) => setAddressValue(e.target.value)}
+                  required
+                />
                 <label htmlFor="phone">Phone Number</label>
-                <input type="tel" id="phone" required />
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhoneValue(e.target.value)}
+                  required
+                />
                 <button type="submit" className="confirmation-button">
                   Place Order
                 </button>

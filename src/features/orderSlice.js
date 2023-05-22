@@ -13,11 +13,20 @@ const orderSlice = createSlice({
     //image: null,
   },
   reducers: {
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
+    setEmail: (state, action) => {
+      state.email = action.payload;
+    },
+    setAddress: (state, action) => {
+      state.address = action.payload;
+    },
+    setPhone: (state, action) => {
+      state.phone = action.payload;
+    },
+
     setOrderDetails: (state, action) => {
-      state.name = action.payload.name;
-      state.email = action.payload.email;
-      state.address = action.payload.address;
-      state.phone = action.payload.phone;
       state.items = action.payload.items;
       state.total = action.payload.total;
       state.orderDetails = action.payload;
@@ -26,7 +35,16 @@ const orderSlice = createSlice({
   },
 });
 
-export const { setOrderDetails } = orderSlice.actions;
-export const selectOrderDetails = state => state.order.orderDetails;
+export const {
+  setName,
+  setEmail,
+  setAddress,
+  setPhone,
+  setOrderDetails,
+} = orderSlice.actions;
+export const selectOrderDetails = (state) => {
+  const { name, email, address, phone, orderDetails } = state.order;
+  return { name, email, address, phone, ...orderDetails };
+};
 
 export default orderSlice.reducer;
