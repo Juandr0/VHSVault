@@ -1,5 +1,6 @@
 
 .movieContainer {
+
     width: 300px;
     flex-grow: 1;
     padding: 0px 5px;
@@ -55,3 +56,11 @@
 }
 
 
+
+@media (max-width: 340px) {
+
+    .movieContainer {
+        max-width: 200px;
+    }
+
+}
