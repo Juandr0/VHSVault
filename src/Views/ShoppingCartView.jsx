@@ -36,7 +36,6 @@ const ShoppingCartView = () => {
   useEffect(() => {
     if (name != "") {
       dispatch(setName(name));
-      console.log("updated name " + name)
     }
 
   }, [name]);
@@ -48,15 +47,15 @@ const ShoppingCartView = () => {
   }, [email]);
 
   useEffect(() => {
-    if (address != ""){
+    if (address != "") {
       dispatch(setAddress(address));
     }
   }, [address]);
 
   useEffect(() => {
-   if (phone != ""){
-    dispatch(setPhone(phone));
-   }
+    if (phone != "") {
+      dispatch(setPhone(phone));
+    }
   }, [phone]);
 
   useEffect(() => {
@@ -112,38 +111,14 @@ const ShoppingCartView = () => {
               <p className="total">Total: ${(total).toFixed(2)}</p>
               <h3>Shipping information</h3>
               <form className="checkoutForm" onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setNameValue(e.target.value)}
-                  required
-                />
+                <input type="text" id="name" value={name} onChange={(e) => setNameValue(e.target.value)} required />
                 <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmailValue(e.target.value)}
-                  required
-                />
+                <input type="email" id="email" value={email} onChange={(e) => setEmailValue(e.target.value)} required />
                 <label htmlFor="address">Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  value={address}
-                  onChange={(e) => setAddressValue(e.target.value)}
-                  required
-                />
+                <input type="text" id="address" value={address} onChange={(e) => setAddressValue(e.target.value)} required />
                 <label htmlFor="phone">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhoneValue(e.target.value)}
-                  required
-                />
+                <input type="tel" id="phone" value={phone} onChange={(e) => setPhoneValue(e.target.value)} required />
+
                 <button type="submit" className="confirmation-button">
                   Place Order
                 </button>
