@@ -5,7 +5,6 @@ import ShoppingCartMovie from '../Model/ShoppingCartMovie';
 
 const OrderConfirmationView = () => {
   const orderDetails = useSelector(selectOrderDetails);
-  console.log(orderDetails.name);
 
 
   return (

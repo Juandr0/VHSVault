@@ -68,9 +68,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const currentItem = state.items.find((cartItem) => cartItem.title === action.payload);
-      console.log('före ' + state.cartCount)
       state.cartCount = state.cartCount - currentItem.count;
-      console.log('efter ' + state.cartCount)
       const newState = state.items.filter((cartItem) => cartItem.title !== action.payload);
       state.items = newState;
     },
