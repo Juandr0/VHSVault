@@ -1,135 +1,135 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, selectCartItems, clearCart } from "../features/cartSlice";
-import { setOrderDetails } from "../features/orderSlice";
-import './CSS/ShoppingCartView.css';
-import ShoppingCartMovie from '../Model/ShoppingCartMovie';
+import { selectCartItems, clearCart } from "../features/cartSlice";
+import {
+  setOrderDetails,
+  selectOrderDetails,
+  setName,
+  setEmail,
+  setAddress,
+  setPhone,
+} from "../features/orderSlice";
+import "./CSS/ShoppingCartView.css";
+import ShoppingCartMovie from "../Model/ShoppingCartMovie";
 import { useEffect, useState } from "react";
 import FirebaseConfig from "../Components/FireBaseConfig";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 
-
 const MovieCard = ({ movie, index }) => {
-  const dispatch = useDispatch();
-  const removeFromCartHandler = () => dispatch(removeFromCart(movie.title));
-  const posterWidth = 150;
-  const db = FirebaseConfig.getFirestoreInstance();
-  return (
-    <ShoppingCartMovie props={movie} showButtons={true} />
-  )
-}
+  return <ShoppingCartMovie props={movie} showButtons={true} />;
+};
 
 const ShoppingCartView = () => {
-  const [orderNumber, setOrderNumber] = useState('');
+  const [orderNumber, setOrderNumber] = useState("");
   const cartItems = useSelector(selectCartItems);
   const total = cartItems.reduce((acc, curr) => acc + curr.price * curr.count, 0);
   const dispatch = useDispatch();
   const clearCartHandler = () => dispatch(clearCart());
   const db = FirebaseConfig.getFirestoreInstance();
+  const navigate = useNavigate();
 
+  const [name, setNameValue] = useState("");
+  const [email, setEmailValue] = useState("");
+  const [address, setAddressValue] = useState("");
+  const [phone, setPhoneValue] = useState("");
 
   useEffect(() => {
-    
-    const fetchData = async () => {
-      const orderNumber = await fetchOrderNumber();
-      setOrderNumber(orderNumber);
-    };
-  
-    fetchData();
-  }, []);
-  
+    if (name != "") {
+      dispatch(setName(name));
+    }
 
+  }, [name]);
 
-  const placeOrderHandler = async () => {
+  useEffect(() => {
+    if (email != "") {
+      dispatch(setEmail(email));
+    }
+  }, [email]);
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const address = document.getElementById('address').value;
-    const phone = document.getElementById('phone').value;
-    incrementDBOrderNumber();
-    dispatch(setOrderDetails({orderNumber, name, email, address, phone, items: cartItems, total }));
-    clearCartHandler();
-  };
+  useEffect(() => {
+    if (address != "") {
+      dispatch(setAddress(address));
+    }
+  }, [address]);
+
+  useEffect(() => {
+    if (phone != "") {
+      dispatch(setPhone(phone));
+    }
+  }, [phone]);
+
+  useEffect(() => {
+    if (orderNumber !== "") {
+      incrementDBOrderNumber();
+
+      dispatch(setOrderDetails({ orderNumber, items: cartItems, total }));
+      clearCartHandler();
+      navigate("/confirmation");
+    }
+  }, [orderNumber]);
 
   const fetchOrderNumber = async () => {
-
-    const docRef = doc(db, "orders", "orderNumber")
+    const docRef = doc(db, "orders", "orderNumber");
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("orderNR")
       const dataAsString = JSON.stringify(docSnap.data().nextNumber);
-      return (dataAsString)
-   
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
+      setOrderNumber(dataAsString);
+      return dataAsString;
     }
-    
-  }
-
-
+  };
 
   const incrementDBOrderNumber = () => {
     const docRef = doc(db, "orders", "orderNumber");
-    const newOrderNumber = (parseInt(orderNumber) + 1);
-    setDoc(docRef, { nextNumber : newOrderNumber })
-  }
+    const newOrderNumber = parseInt(orderNumber) + 1;
+    setDoc(docRef, { nextNumber: newOrderNumber });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchOrderNumber();
+  };
 
   return (
     <div>
-    <h2 id="shoppingCartCheckout">Checkout</h2>
-    <div className={cartItems.length === 0 ? '' : 'shopping-cart'}>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        
-        <div className="checkoutContainer">
-          <div>
-            {cartItems.map((item, index) => (
-              <MovieCard key={index} movie={item} index={index} />
-            ))}
-          </div>
-          <div className="checkoutInputField">
-            
-          <p className="item-count">
-          {cartItems.reduce((acc, curr) => acc + curr.count, 0)}{' '}
-          {cartItems.reduce((acc, curr) => acc + curr.count, 0) > 1 ? 'items' : 'item'} in the cart
-           </p>
-            <p className="total">Total: ${(total).toFixed(2)}</p>
-        
-            <h3>Shipping information</h3>
-            <form className="checkoutForm">
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" required />
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" required />
-              <label htmlFor="address">Address</label>
-              <input type="text" id="address" required />
-              <label htmlFor="phone">Phone Number</label>
-              <input type="tel" id="phone" required />
-            </form>
-            <Link to="/confirmation" className="confirmation-button" onClick={placeOrderHandler}>
-              Place Order
-            </Link>
-          
-          </div>
+      <h2 id="shoppingCartCheckout">Checkout</h2>
+      <div className={cartItems.length === 0 ? "" : "shopping-cart"}>
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <div className="checkoutContainer">
+            <div>
+              {cartItems.map((item, index) => (
+                <MovieCard key={index} movie={item} index={index} />
+              ))}
+            </div>
+            <div className="checkoutInputField">
+              <p className="item-count">
+                {cartItems.reduce((acc, curr) => acc + curr.count, 0)}{" "}
+                {cartItems.reduce((acc, curr) => acc + curr.count, 0) > 1 ? "items" : "item"} in the cart
+              </p>
+              <p className="total">Total: ${(total).toFixed(2)}</p>
+              <h3>Shipping information</h3>
+              <form className="checkoutForm" onSubmit={handleSubmit}>
+                <label htmlFor="name">Name</label>
+                <input type="text" id="name" value={name} onChange={(e) => setNameValue(e.target.value)} required />
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" value={email} onChange={(e) => setEmailValue(e.target.value)} required />
+                <label htmlFor="address">Address</label>
+                <input type="text" id="address" value={address} onChange={(e) => setAddressValue(e.target.value)} required />
+                <label htmlFor="phone">Phone Number</label>
+                <input type="tel" id="phone" value={phone} onChange={(e) => setPhoneValue(e.target.value)} required />
 
-        </div>
-      )}
+                <button type="submit" className="confirmation-button">
+                  Place Order
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-    </div>
-    
   );
-}
+};
 
 export default ShoppingCartView;
-
-
-
-
-
-
-
-
-

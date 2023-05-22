@@ -4,7 +4,7 @@
 
 .shopping-cart {
   padding: 20px;
-  border: 1px solid rgba(128, 128, 128, 0.53);
+  border: 1px solid #a12f36;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

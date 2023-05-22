@@ -5,7 +5,7 @@
   margin: 50px auto;
   max-width: 600px;
   padding: 20px;
-  border: 2px solid #a12f36;
+  border: 1px solid #a12f36;
   border-radius: 8px;
   box-sizing: border-box;
   margin-top: 100px;
@@ -52,6 +52,13 @@
   .order-confirmation {
     max-width: 800px;
     margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 431px) {
+  .order-confirmation {
+    margin-top: 100px;
+    align-items: flex-start;
   }
 }
 

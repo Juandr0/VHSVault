@@ -42,6 +42,10 @@ input[type=number]{
     height: 30px;
 }
 
+.cartAmountContainerNoBorder {
+    height: 30px;
+}
+
 .cartAmountContainer button {
     outline: none;
     background-color: transparent;
