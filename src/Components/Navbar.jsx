@@ -34,6 +34,7 @@ const Navbar = ({
     setIsMenuOpen(false);
     handleCategory(event, category);
     setShowOptions(false);
+    navigate('/');
   };
 
   const handleBestRatedClick = () => {
@@ -61,6 +62,8 @@ const Navbar = ({
   };
 
   return (
+
+    <div className='navBarIcons'>
     <nav className='navBar'>
       <div className='menuToggle' onClick={handleMenuToggle}>
         <i className='fa fa-bars'></i>
@@ -71,9 +74,9 @@ const Navbar = ({
           {isMenuOpen ? 'Home' : <img src={logo} alt="VHS Vault" className="navbar-logo" />}
         </Link>
 
-        <div className='best-rated' onClick={handleBestRatedClick}>
+        <Link to="/" className='best-rated' onClick={handleBestRatedClick}>
           Best Rated
-        </div>
+        </Link>
 
         <div className={`dropdown ${showOptions ? 'open' : ''}`}>
           <div className="dropdown-header" onClick={toggleOptions}>
@@ -86,11 +89,24 @@ const Navbar = ({
             >
               Action
             </div>
+          
             <div
               className="dropdown-option"
               onClick={(event) => handleCategoryClick(event, { value: 35, label: 'Comedy' })}
             >
               Comedy
+            </div>
+            <div
+              className="dropdown-option"
+              onClick={(event) => handleCategoryClick(event, { value: 18, label: 'Drama' })}
+            >
+              Drama
+            </div>
+            <div
+              className="dropdown-option"
+              onClick={(event) => handleCategoryClick(event, { value: 10751, label: 'Family' })}
+            >
+              Family
             </div>
             <div
               className="dropdown-option"
@@ -117,6 +133,7 @@ const Navbar = ({
         </li>
       </ul>
     </nav>
+    </div>
   );
 };
 
