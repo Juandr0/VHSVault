@@ -111,6 +111,7 @@ const ShoppingCartView = () => {
               <p className="total">Total: ${(total).toFixed(2)}</p>
               <h3>Shipping information</h3>
               <form className="checkoutForm" onSubmit={handleSubmit}>
+                <label htmlFor="name">Name</label>
                 <input type="text" id="name" value={name} onChange={(e) => setNameValue(e.target.value)} required />
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" value={email} onChange={(e) => setEmailValue(e.target.value)} required />
