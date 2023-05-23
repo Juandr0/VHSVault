@@ -25,9 +25,6 @@ function App() {
 
   useEffect(() => {
     switch (apiFetchType) {
-      case 'firstFetch':
-        fetchMoviesData();
-        break;
 
       case 'category':
         fetchCategoriesData(categoryID);
@@ -41,18 +38,22 @@ function App() {
         fetchBestRatedData();
         break;
 
+      default:
+        fetchMoviesData();
+        break;
+
     }
   }, [pageNumber])
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
-    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null, setApiFetchType);
+   
     if (apiFetchType != 'search' && apiFetchType != 'firstFetch') {
       setPageNumber(1);
       window.scrollTo(0, 0); // Scroll to the top of the page
-      setMovies(moviesData.results);
     }
 
+    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null, setApiFetchType);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -66,15 +67,15 @@ function App() {
 
   const fetchCategoriesData = async (category) => {
     setLoading(true);
-    const moviesData = await apiFetcher(null, pageNumber, null, category, null, setApiFetchType);
+    
 
-    if (apiFetchType != 'category') {
+    if (apiFetchType != 'category' ||  categoryID != category) {
       setPageNumber(1);
       window.scrollTo(0, 0); // Scroll to the top of the page
-      setMovies(moviesData.results);
     }
+    setCategoryID(category); 
+    const moviesData = await apiFetcher(null, pageNumber, null, category, null, setApiFetchType);
 
-   
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
     } else {
@@ -86,14 +87,13 @@ function App() {
 
   const fetchBestRatedData = async () => {
     setLoading(true);
-    const moviesData = await apiFetcher(null, pageNumber, null, null, true, setApiFetchType);
+
 
     if (apiFetchType != 'bestRated') {
       setPageNumber(1);
-      setMovies(moviesData.results);
     }
 
-   
+    const moviesData = await apiFetcher(null, pageNumber, null, null, true, setApiFetchType);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -114,12 +114,9 @@ function App() {
   };
 
   const handleCategory = (e, category) => {
-    setMovies([]);
-    setPageNumber(1);
     e.preventDefault();
     const categoryId = category.value; // extract the category value
-    setCategoryID(categoryId); 
-    fetchCategoriesData(categoryID);
+    fetchCategoriesData(categoryId);
   };
 
 
