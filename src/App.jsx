@@ -74,6 +74,7 @@ function App() {
       window.scrollTo(0, 0); // Scroll to the top of the page
     }
     setCategoryID(category); 
+
     const moviesData = await apiFetcher(null, pageNumber, null, category, null, setApiFetchType);
 
     if (pageNumber > 1) {
@@ -122,13 +123,27 @@ function App() {
 
   //Scroll event listener 
   useEffect(() => {
-    const handelScroll = () => {
+    const debounce = (func, delay) => {
+      let timerId;
+      return function (...args) {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => func.apply(this, args), delay);
+      };
+    };
+  
+    const handleScroll = debounce(() => {
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight * 0.9) {
-        setPageNumber(pageNumber + 1);
+        setPageNumber((prevPageNumber) => prevPageNumber + 1);
       }
-    }
-    window.addEventListener('scroll', handelScroll);
+    }, 300);
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [pageNumber]);
+  
 
   return (
     <div>
