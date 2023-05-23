@@ -17,13 +17,25 @@ const apiFetcher = async (searchTerm , pageNumber, idFetch, category, bestRated)
     url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&primary_release_date.lte=2005-12-31&vote_count.gte=1000&page=${pageNumber}`;
   }
 
-  const apiCall = await fetch(url);
-  if (apiCall.status === 404) {
-    return 404;
+  try {
+    const apiCall = await fetch(url);
+    if (apiCall.status === 404) {
+      return 404;
+    }
+    const data = await apiCall.json();
+    console.log(  
+      'searchterm: ' + searchTerm,
+      'idFetch: ' + idFetch,
+      'category: ' + category,
+      'bestRated: ' + bestRated,
+      'pageNumber: ' + pageNumber
+    )
+    return data;
+  } catch (error) {
+    console.log('error: ' +error);
   }
-  const data = await apiCall.json();
-  
-  return data;
+
+
 }
 
 

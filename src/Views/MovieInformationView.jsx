@@ -82,7 +82,7 @@ const MovieInformationView = () => {
     if (movie?.title) {
         return (
             <div className='MovieInfoPage'>
-                <i class="fa fa-arrow-circle-left backButton" onClick={() => {navigate(-1)}}></i>
+                <i className="fa fa-arrow-circle-left backButton" onClick={() => {navigate(-1)}}></i>
                 <div className='MovieInfoViewContainer'>
 
                     <Movie
