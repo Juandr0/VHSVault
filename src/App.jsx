@@ -94,6 +94,7 @@ function App() {
 
     if (apiFetchType != 'bestRated') {
       setPageNumber(1);
+      window.scrollTo(0, 0); // Scroll to the top of the page
     }
     setApiFetchType('bestRated');
     const moviesData = await apiFetcher(null, pageNumber, null, null, true, setApiFetchType);
@@ -107,14 +108,26 @@ function App() {
   };
 
 
-
+  const emptyMovies = () => {
+    setPageNumber(1);
+    setMovies([]);
+  } 
 
   const handleSubmit = async (e) => {
-    setMovies([]);
-    setPageNumber(1);
     e.preventDefault();
+    emptyMovies();
     fetchMoviesData(searchTerm);
   };
+
+  const handleLogoClick = async (searchTerm) =>{
+    emptyMovies();
+    fetchMoviesData(searchTerm);
+  }
+
+  const handleBestRatedClick = async () => {
+    emptyMovies();
+    fetchBestRatedData()
+  }
 
   const handleCategory = (e, category) => {
     e.preventDefault();
@@ -157,6 +170,8 @@ function App() {
         apiFetcher={apiFetcher}
         fetchMoviesData={fetchMoviesData}
         fetchBestRatedData={fetchBestRatedData} 
+        handleLogoClick={handleLogoClick}
+        handleBestRatedClick={handleBestRatedClick}
         />
       <Routes>
         <Route
