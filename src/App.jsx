@@ -15,7 +15,6 @@ function App() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryID, setCategoryID] = useState(null);
-  const [bestRated, setBestRated] = useState();
 
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
@@ -39,7 +38,7 @@ function App() {
         break;
 
       case 'bestRated': 
-        fetchBestRatedData(bestRated);
+        fetchBestRatedData();
         break;
 
     }
@@ -85,13 +84,12 @@ function App() {
   };
 
 
-  const fetchBestRatedData = async (bestRated) => {
+  const fetchBestRatedData = async () => {
     setLoading(true);
-    const moviesData = await apiFetcher(null, pageNumber, null, null, bestRated, setApiFetchType);
+    const moviesData = await apiFetcher(null, pageNumber, null, null, true, setApiFetchType);
 
     if (apiFetchType != 'bestRated') {
       setPageNumber(1);
-      window.scrollTo(0, 0); // Scroll to the top of the page
       setMovies(moviesData.results);
     }
 
