@@ -47,12 +47,12 @@ function App() {
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
+    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null, setApiFetchType);
     if (apiFetchType != 'search' && apiFetchType != 'firstFetch') {
       setPageNumber(1);
+      setMovies(moviesData.results);
     }
 
- 
-    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null, setApiFetchType);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -66,12 +66,14 @@ function App() {
 
   const fetchCategoriesData = async (category) => {
     setLoading(true);
-    if (apiFetchType != 'category') {
-      setPageNumber(1);
-    }
-
     const moviesData = await apiFetcher(null, pageNumber, null, category, null, setApiFetchType);
 
+    if (apiFetchType != 'category') {
+      setPageNumber(1);
+      setMovies(moviesData.results);
+    }
+
+   
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
     } else {
@@ -83,11 +85,14 @@ function App() {
 
   const fetchBestRatedData = async (bestRated) => {
     setLoading(true);
+    const moviesData = await apiFetcher(null, pageNumber, null, null, bestRated, setApiFetchType);
+
     if (apiFetchType != 'bestRated') {
       setPageNumber(1);
+      setMovies(moviesData.results);
     }
 
-    const moviesData = await apiFetcher(null, pageNumber, null, null, bestRated, setApiFetchType);
+   
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
