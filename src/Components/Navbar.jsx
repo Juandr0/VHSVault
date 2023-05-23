@@ -11,8 +11,8 @@ const Navbar = ({
   searchTerm,
   setSearchTerm,
   handleCategory,
-  fetchBestRatedData,
-  fetchMoviesData
+  handleBestRatedClick,
+  handleLogoClick
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -22,10 +22,8 @@ const Navbar = ({
 
   const handleHomeClick = () => {
     // Make the API fetch
-    fetchMoviesData(searchTerm);
-
+    handleLogoClick(searchTerm);
     setIsMenuOpen(false);
-
     // Navigate to the home page
     navigate('/');
   };
@@ -37,9 +35,9 @@ const Navbar = ({
     navigate('/');
   };
 
-  const handleBestRatedClick = () => {
+  const handleBestRated= () => {
     setIsMenuOpen(false);
-    fetchBestRatedData(fetchBestRatedData);
+    handleBestRatedClick();
     window.scrollTo(0, 0); // Scroll to the top of the page
   };
 
@@ -75,7 +73,7 @@ const Navbar = ({
           {isMenuOpen ? 'Home' : <img src={logo} alt="VHS Vault" className="navbar-logo" />}
         </Link>
 
-        <Link to="/" className='best-rated' onClick={handleBestRatedClick}>
+        <Link to="/" className='best-rated' onClick={handleBestRated}>
           Best Rated
         </Link>
 
