@@ -22,7 +22,7 @@ const Navbar = ({
 
   const handleHomeClick = () => {
     // Make the API fetch
-    handleLogoClick(searchTerm);
+    handleLogoClick();
     setIsMenuOpen(false);
     // Navigate to the home page
     navigate('/');
