@@ -138,7 +138,7 @@ function App() {
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight * 0.9) {
         setPageNumber((prevPageNumber) => prevPageNumber + 1);
       }
-    }, 300);
+    }, 150);
   
     window.addEventListener('scroll', handleScroll);
   
