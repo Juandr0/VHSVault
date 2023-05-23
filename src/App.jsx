@@ -43,7 +43,7 @@ function App() {
         break;
 
     }
-  }, [pageNumber])
+  }, [pageNumber, apiFetchType])
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
@@ -109,24 +109,29 @@ function App() {
 
 
   const emptyMovies = () => {
-    setPageNumber(1);
     setMovies([]);
   } 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     emptyMovies();
-    fetchMoviesData(searchTerm);
+    setPageNumber(1);
+    setApiFetchType('search');
+    await fetchMoviesData(searchTerm);
   };
 
-  const handleLogoClick = async (searchTerm) =>{
+  const handleLogoClick = async () =>{
     emptyMovies();
-    fetchMoviesData(searchTerm);
+    setPageNumber(1);
+    setApiFetchType('search');
+    await fetchMoviesData(null);
   }
 
   const handleBestRatedClick = async () => {
     emptyMovies();
-    fetchBestRatedData()
+    setPageNumber(1);
+    setApiFetchType('bestRated');
+    await fetchBestRatedData()
   }
 
   const handleCategory = (e, category) => {
