@@ -1,4 +1,4 @@
-import { json, useLocation } from 'react-router-dom';
+import { json, useLocation, useNavigate } from 'react-router-dom';
 import Movie from '../Model/Movie';
 import './CSS/MovieInformationView.css';
 import apiFetcher from '../Components/apiFetcher';
@@ -8,7 +8,7 @@ import CreateNewComment from '../Model/CreateNewComment';
 import DisplayComments from '../Model/DisplayComments';
 import FirebaseConfig from '../Components/FireBaseConfig';
 
-import { collection, onSnapshot, addDoc} from "firebase/firestore";
+import { collection, onSnapshot, addDoc } from "firebase/firestore";
 
 const MovieInformationView = () => {
     const location = useLocation();
@@ -18,6 +18,7 @@ const MovieInformationView = () => {
     const providedMovieId = location.pathname.split('/')[2];
 
     const db = FirebaseConfig.getFirestoreInstance();
+    const navigate = useNavigate();
 
 
     const addCommentToDB = async (inputName, inputComment, providedMovieId) => {
@@ -80,8 +81,10 @@ const MovieInformationView = () => {
     const posterWidth = 500;
     if (movie?.title) {
         return (
-            <div>
+            <div className='MovieInfoPage'>
+                <i class="fa fa-arrow-circle-left backButton" onClick={() => {navigate(-1)}}></i>
                 <div className='MovieInfoViewContainer'>
+
                     <Movie
                         props={movie}
                         withAddButton={true}
@@ -91,17 +94,17 @@ const MovieInformationView = () => {
                     />
 
                 </div>
-                <hr/>
+                <hr />
                 <div className='movieCommentsContainer'>
-                    
-                <h3>User comments</h3>
+
+                    <h3>User comments</h3>
                     <div className='readCommentsContainer'>
                         {comments.map((comment, index) => (
 
                             <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId} />
                         ))}
                     </div>
-                  
+
                     <div className='newCommentContainer'>
                         <h3>Add a new comment</h3>
                         <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />

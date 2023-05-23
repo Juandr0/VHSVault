@@ -1,4 +1,22 @@
+.movieInfoPage {
+    width: 100%;
+}
+
+
+.backButton {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    font-size: 3em;
+}
+
+.backButton:hover {
+    cursor: pointer;
+}
+
+
 .MovieInfoViewContainer {
+    justify-content: center;
     margin-top: 150px;
     display: flex;
     flex-wrap: wrap;
@@ -54,18 +72,18 @@
         flex-wrap: wrap;
     }
 
- 
+
 
     .newCommentContainer {
         margin: 20px;
     }
+
     @media (max-width: 340px) {
         .MovieInfoViewContainer {
             width: 230px;
-            
+
         }
 
-  
+
     }
 }
-
