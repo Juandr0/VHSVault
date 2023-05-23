@@ -50,6 +50,7 @@ function App() {
     const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null, setApiFetchType);
     if (apiFetchType != 'search' && apiFetchType != 'firstFetch') {
       setPageNumber(1);
+      window.scrollTo(0, 0); // Scroll to the top of the page
       setMovies(moviesData.results);
     }
 
@@ -70,6 +71,7 @@ function App() {
 
     if (apiFetchType != 'category') {
       setPageNumber(1);
+      window.scrollTo(0, 0); // Scroll to the top of the page
       setMovies(moviesData.results);
     }
 
@@ -89,6 +91,7 @@ function App() {
 
     if (apiFetchType != 'bestRated') {
       setPageNumber(1);
+      window.scrollTo(0, 0); // Scroll to the top of the page
       setMovies(moviesData.results);
     }
 
