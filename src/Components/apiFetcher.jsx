@@ -1,20 +1,17 @@
-const apiFetcher = async (searchTerm , pageNumber, idFetch, category, bestRated, setApiFetchType) => {
+const apiFetcher = async (searchTerm , pageNumber, idFetch, category, bestRated) => {
  
   const apiKey = '4d05f47d22d396a78fc18c0d7c1be300';
   let url = ''
   
   if (searchTerm) {
     url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=${pageNumber}&include_adult=false`;
-    //setApiFetchType('search');
   } else if (idFetch) {
     url = `https://api.themoviedb.org/3/movie/${idFetch}?api_key=${apiKey}&language=en-US`;
     
   } else if (category) {
     url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&primary_release_date.lte=2005-12-31&vote_count.gte=1000&page=${pageNumber}&with_genres=${category}`;
-    //setApiFetchType('category');
   } else if (bestRated) {
     url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&primary_release_date.lte=2005-12-31&vote_count.gte=1000&page=${pageNumber}`;
-   // setApiFetchType('bestRated');
   } else  {
     url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&primary_release_date.lte=2005-12-31&vote_count.gte=1000&page=${pageNumber}`;
   }

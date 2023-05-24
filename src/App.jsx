@@ -98,8 +98,6 @@ function App() {
 
   const fetchBestRatedData = async () => {
     setLoading(true);
-
-
     if (apiFetchType != 'bestRated') {
       setPageNumber(1);
       window.scrollTo(0, 0); // Scroll to the top of the page
@@ -126,10 +124,12 @@ function App() {
   };
 
   const handleLogoClick = async () =>{
+    setApiFetchType('search');
     await fetchMoviesData(null);
   }
 
   const handleBestRatedClick = async () => {
+    setApiFetchType('bestRated');
     await fetchBestRatedData()
   }
 
