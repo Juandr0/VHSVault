@@ -18,40 +18,45 @@ function App() {
 
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [apiFetchType, setApiFetchType] = useState('firstFetch');
+  const [apiFetchType, setApiFetchType] = useState('search');
+  const [navbarClicked, setNavbarClicked] = useState(false);
 
 
+  useEffect (() => {
+    fetchMoviesData(null);
+  }, [])
 
 
   useEffect(() => {
-    switch (apiFetchType) {
-
-      case 'category':
-        fetchCategoriesData(categoryID);
-        break;
-
-      case 'search':
-        fetchMoviesData(searchTerm);
-        break;
-
-      case 'bestRated': 
-        fetchBestRatedData();
-        break;
-
-      default:
-        fetchMoviesData();
-        break;
-
+    console.log('switch sats körs')
+  
+      switch (apiFetchType) {
+        case 'category':
+          fetchCategoriesData(categoryID);
+          break;
+  
+        case 'search':
+          fetchMoviesData(searchTerm);
+          break;
+  
+        case 'bestRated': 
+          fetchBestRatedData();
+          break;
+  
+        default:
+          fetchMoviesData();
+          break;
     }
   }, [pageNumber])
 
 
-
+  //Reset useeffect
   useEffect(() => {
+    console.log('reset useffect körs')
+    setMovies([]);
     window.scrollTo(0, 0); // Scroll to the top of the page
     setPageNumber(1);
-    setMovies([]);
-  }, [apiFetchType]);
+  }, [apiFetchType, navbarClicked]);
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
@@ -62,7 +67,7 @@ function App() {
     }
     setApiFetchType('search');
 
-    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null, setApiFetchType);
+    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -76,16 +81,16 @@ function App() {
 
   const fetchCategoriesData = async (category) => {
     setLoading(true);
-    
+  
 
-    if (apiFetchType != 'category' ||  categoryID != category) {
+    if (categoryID != category) {
       setPageNumber(1);
       window.scrollTo(0, 0); // Scroll to the top of the page
     }
     setCategoryID(category); 
     setApiFetchType('category');
 
-    const moviesData = await apiFetcher(null, pageNumber, null, category, null, setApiFetchType);
+    const moviesData = await apiFetcher(null, pageNumber, null, category, null);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -99,11 +104,14 @@ function App() {
   const fetchBestRatedData = async () => {
     setLoading(true);
     if (apiFetchType != 'bestRated') {
-      setPageNumber(1);
       window.scrollTo(0, 0); // Scroll to the top of the page
+      setApiFetchType('bestRated');
     }
-    setApiFetchType('bestRated');
-    const moviesData = await apiFetcher(null, pageNumber, null, null, true, setApiFetchType);
+
+
+
+  
+    const moviesData = await apiFetcher(null, pageNumber, null, null, true);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -118,26 +126,30 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-    await fetchMoviesData(searchTerm);
+    console.log('\nHandler körs: Search' )
+    setApiFetchType('search');
   };
 
   const handleLogoClick = async () =>{
+    console.log('\nHandler körs: Search' )
     setApiFetchType('search');
-    await fetchMoviesData(null);
   }
 
   const handleBestRatedClick = async () => {
+    console.log('\nHandler körs: best rated' )
     setApiFetchType('bestRated');
-    await fetchBestRatedData()
   }
 
-  const handleCategory = (e, category) => {
+  const handleCategory = async (e, category) => {
     e.preventDefault();
+    console.log('\nHandler körs: category' )
+
     const categoryId = category.value; // extract the category value
     setCategoryID(categoryId);
-    fetchCategoriesData(categoryId);
+    setApiFetchType('category');
+    if (apiFetchType === 'category') {
+          setNavbarClicked(!navbarClicked);
+    }
   };
 
 
