@@ -18,51 +18,78 @@ function App() {
 
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [apiFetchType, setApiFetchType] = useState('search');
-  const [navbarClicked, setNavbarClicked] = useState(false);
+  const [apiFetchType, setApiFetchType] = useState('firstFetch');
+  const [navbarClickedToggler, setNavbarClickedToggler] = useState(false);
+  const [toggleReload, setToggleReload] = useState(false);
 
-
-  useEffect (() => {
-    fetchMoviesData(null);
-  }, [])
 
 
   useEffect(() => {
+
     console.log('switch sats körs')
-  
-      switch (apiFetchType) {
-        case 'category':
-          fetchCategoriesData(categoryID);
-          break;
-  
-        case 'search':
-          fetchMoviesData(searchTerm);
-          break;
-  
-        case 'bestRated': 
-          fetchBestRatedData();
-          break;
-  
-        default:
-          fetchMoviesData();
-          break;
+    switch (apiFetchType) {
+      case 'category':
+        fetchCategoriesData(categoryID);
+        break;
+
+      case 'search':
+        fetchMoviesData(searchTerm);
+        break;
+
+      case 'bestRated':
+        fetchBestRatedData();
+        break;
+
+      default:
+        fetchMoviesData();
+        break;
     }
   }, [pageNumber])
+
+  useEffect(() => {
+    if (apiFetchType != 'firstFetch' ) {
+      if (pageNumber === 1) {
+        switch (apiFetchType) {
+          case 'category':
+            fetchCategoriesData(categoryID);
+            break;
+  
+          case 'search':
+            fetchMoviesData(searchTerm);
+            break;
+  
+          case 'bestRated':
+            fetchBestRatedData();
+            break;
+  
+          default:
+            fetchMoviesData();
+            break;
+        }
+      }
+    }
+  }, [toggleReload]);
+
 
 
   //Reset useeffect
   useEffect(() => {
     console.log('reset useffect körs')
-    setMovies([]);
+    if (pageNumber === 1) {
+      setMovies([]);
+      setToggleReload(!toggleReload);
+    }
+
     window.scrollTo(0, 0); // Scroll to the top of the page
     setPageNumber(1);
-  }, [apiFetchType, navbarClicked]);
+  }, [navbarClickedToggler]);
+
+
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
-   
+
     if (apiFetchType != 'search' && apiFetchType != 'firstFetch') {
-      setPageNumber(1);
       window.scrollTo(0, 0); // Scroll to the top of the page
     }
     setApiFetchType('search');
@@ -79,15 +106,12 @@ function App() {
 
 
 
+
+
+
   const fetchCategoriesData = async (category) => {
     setLoading(true);
-  
 
-    if (categoryID != category) {
-      setPageNumber(1);
-      window.scrollTo(0, 0); // Scroll to the top of the page
-    }
-    setCategoryID(category); 
     setApiFetchType('category');
 
     const moviesData = await apiFetcher(null, pageNumber, null, category, null);
@@ -110,7 +134,7 @@ function App() {
 
 
 
-  
+
     const moviesData = await apiFetcher(null, pageNumber, null, null, true);
 
     if (pageNumber > 1) {
@@ -126,32 +150,34 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('\nHandler körs: Search' )
+    console.log('\nHandler körs: Search')
+    setNavbarClickedToggler(!navbarClickedToggler);
     setApiFetchType('search');
   };
 
-  const handleLogoClick = async () =>{
-    console.log('\nHandler körs: Search' )
+  const handleLogoClick = async () => {
+    console.log('\nHandler körs: Search')
+    setNavbarClickedToggler(!navbarClickedToggler);
     setApiFetchType('search');
   }
 
   const handleBestRatedClick = async () => {
-    console.log('\nHandler körs: best rated' )
+    console.log('\nHandler körs: best rated')
+    setNavbarClickedToggler(!navbarClickedToggler);
     setApiFetchType('bestRated');
   }
 
   const handleCategory = async (e, category) => {
     e.preventDefault();
-    console.log('\nHandler körs: category' )
-
+    console.log('\nHandler körs: category')
     const categoryId = category.value; // extract the category value
+    const newCategoryId = (categoryId === categoryID);
     setCategoryID(categoryId);
-    setApiFetchType('category');
-    if (apiFetchType === 'category') {
-          setNavbarClicked(!navbarClicked);
-    }
-  };
 
+    setNavbarClickedToggler(!navbarClickedToggler);
+    setApiFetchType('category');
+
+  };
 
   //Scroll event listener 
   useEffect(() => {
@@ -162,20 +188,20 @@ function App() {
         timerId = setTimeout(() => func.apply(this, args), delay);
       };
     };
-  
+
     const handleScroll = debounce(() => {
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight * 0.9) {
         setPageNumber((prevPageNumber) => prevPageNumber + 1);
       }
     }, 150);
-  
+
     window.addEventListener('scroll', handleScroll);
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [pageNumber]);
-  
+
 
   return (
     <div>
@@ -185,10 +211,10 @@ function App() {
         setSearchTerm={setSearchTerm}
         apiFetcher={apiFetcher}
         fetchMoviesData={fetchMoviesData}
-        fetchBestRatedData={fetchBestRatedData} 
+        fetchBestRatedData={fetchBestRatedData}
         handleLogoClick={handleLogoClick}
         handleBestRatedClick={handleBestRatedClick}
-        />
+      />
       <Routes>
         <Route
           path="/"
