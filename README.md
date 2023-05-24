@@ -5,7 +5,13 @@ Contributors
 * Developers: Alexander Carlsson & Michael Bergsten
 ## Screenshots
 
-![Skärmavbild 2023-05-24 kl  14 44 22](https://github.com/Juandr0/Webbshop/assets/47304533/d92554c2-e235-4e3c-aa07-3792c6b10eee)
-![Skärmavbild 2023-05-24 kl  14 40 49](https://github.com/Juandr0/Webbshop/assets/47304533/7249d2ed-d739-42d1-81ea-ffdb10fd969c)
-![Skärmavbild 2023-05-24 kl  14 40 15](https://github.com/Juandr0/Webbshop/assets/47304533/a898e64d-b786-40af-91b0-bc4019a6ec95)
-![Skärmavbild 2023-05-24 kl  14 39 37](https://github.com/Juandr0/Webbshop/assets/47304533/89914d20-952d-45ec-8393-7c6303807a8a)
+
+![Skärmavbild 2023-05-24 kl  14 39 37](https://github.com/Juandr0/Webbshop/assets/47304533/333cf07f-9686-4b4b-b4d3-92f92d25ded9)
+
+![Skärmavbild 2023-05-24 kl  14 44 22](https://github.com/Juandr0/Webbshop/assets/47304533/022334ea-1313-47d8-9e5c-13d9bb932edd)
+
+
+![Skärmavbild 2023-05-24 kl  14 40 15](https://github.com/Juandr0/Webbshop/assets/47304533/3dcad59d-8a5f-46d3-b838-076abaf94c00)
+![Skärmavbild 2023-05-24 kl  14 40 49](https://github.com/Juandr0/Webbshop/assets/47304533/6ada15b7-0446-4c61-9add-5e745987b072)
+
+
