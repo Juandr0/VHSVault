@@ -43,7 +43,15 @@ function App() {
         break;
 
     }
-  }, [pageNumber, apiFetchType])
+  }, [pageNumber])
+
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+    setPageNumber(1);
+    setMovies([]);
+  }, [apiFetchType]);
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
@@ -108,29 +116,20 @@ function App() {
   };
 
 
-  const emptyMovies = () => {
-    setMovies([]);
-  } 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    emptyMovies();
-    setPageNumber(1);
-    setApiFetchType('search');
+
+
     await fetchMoviesData(searchTerm);
   };
 
   const handleLogoClick = async () =>{
-    emptyMovies();
-    setPageNumber(1);
-    setApiFetchType('search');
     await fetchMoviesData(null);
   }
 
   const handleBestRatedClick = async () => {
-    emptyMovies();
-    setPageNumber(1);
-    setApiFetchType('bestRated');
     await fetchBestRatedData()
   }
 
