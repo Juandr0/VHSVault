@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: left;
   margin: 50px auto;
   max-width: 600px;
   padding: 20px;
@@ -9,25 +12,34 @@
   border-radius: 8px;
   box-sizing: border-box;
   margin-top: 100px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .order-confirmation h2 {
   font-size: 2rem;
   margin-bottom: 20px;
+  color: #333;
 }
 
-.order-confirmation p {
+.order-confirmation .order-details {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.order-confirmation .order-details p {
+  margin: 5px 0;
   font-size: 1rem;
-  margin-bottom: 10px;
+  color: #555;
 }
 
-.order-confirmation ul {
+.order-confirmation ul.order-items {
   list-style-type: none;
   padding: 0;
   margin: 10px 0;
 }
 
-.order-confirmation li {
+.order-confirmation ul.order-items li {
   margin: 5px 0;
 }
 
@@ -42,7 +54,7 @@
     margin-bottom: 10px;
   }
 
-  .order-confirmation p {
+  .order-confirmation .order-details p {
     font-size: 0.9rem;
     margin-bottom: 8px;
   }
@@ -62,6 +74,7 @@
     margin: 0px 20px;
   }
 }
+
 
 
   
