@@ -11,22 +11,90 @@ import { useEffect } from 'react';
 
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryID, setCategoryID] = useState(null);
+
+  const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [category, setCategory] = useState(null);
+  const [apiFetchType, setApiFetchType] = useState('firstFetch');
+  const [navbarClickedToggler, setNavbarClickedToggler] = useState(false);
+  const [toggleReload, setToggleReload] = useState(false);
+
+
 
   useEffect(() => {
-    //If statement stops the code from running at entering the site
-    if (pageNumber != 1) {
-      fetchMoviesData(searchTerm)
+
+    console.log('switch sats körs')
+    switch (apiFetchType) {
+      case 'category':
+        fetchCategoriesData(categoryID);
+        break;
+
+      case 'search':
+        fetchMoviesData(searchTerm);
+        break;
+
+      case 'bestRated':
+        fetchBestRatedData();
+        break;
+
+      default:
+        fetchMoviesData();
+        break;
     }
-  },[pageNumber])
+  }, [pageNumber])
+
+  useEffect(() => {
+    if (apiFetchType != 'firstFetch' ) {
+      if (pageNumber === 1) {
+        switch (apiFetchType) {
+          case 'category':
+            fetchCategoriesData(categoryID);
+            break;
+  
+          case 'search':
+            fetchMoviesData(searchTerm);
+            break;
+  
+          case 'bestRated':
+            fetchBestRatedData();
+            break;
+  
+          default:
+            fetchMoviesData();
+            break;
+        }
+      }
+    }
+  }, [toggleReload]);
+
+
+
+  //Reset useeffect
+  useEffect(() => {
+    console.log('reset useffect körs')
+    if (pageNumber === 1) {
+      setMovies([]);
+      setToggleReload(!toggleReload);
+    }
+
+    window.scrollTo(0, 0); // Scroll to the top of the page
+    setPageNumber(1);
+  }, [navbarClickedToggler]);
+
+
 
   const fetchMoviesData = async (searchTerm) => {
     setLoading(true);
-    const moviesData = await apiFetcher(searchTerm, pageNumber);
+
+    if (apiFetchType != 'search' && apiFetchType != 'firstFetch') {
+      window.scrollTo(0, 0); // Scroll to the top of the page
+    }
+    setApiFetchType('search');
+
+    const moviesData = await apiFetcher(searchTerm, pageNumber, null, null, null);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -34,15 +102,19 @@ function App() {
       setMovies(moviesData.results);
     }
     setLoading(false);
-  };  
+  };
 
-  useEffect(() => {
-    fetchMoviesData();
-  }, []);
+
+
+
+
 
   const fetchCategoriesData = async (category) => {
     setLoading(true);
-    const moviesData = await apiFetcher(null, pageNumber, null, category);
+
+    setApiFetchType('category');
+
+    const moviesData = await apiFetcher(null, pageNumber, null, category, null);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -50,15 +122,20 @@ function App() {
       setMovies(moviesData.results);
     }
     setLoading(false);
-  };  
+  };
 
-  useEffect(() => {
-    fetchMoviesData();
-  }, []);
 
-  const fetchBestRatedData = async (bestRated) => {
+  const fetchBestRatedData = async () => {
     setLoading(true);
-    const moviesData = await apiFetcher(null, pageNumber, null, null, bestRated);
+    if (apiFetchType != 'bestRated') {
+      window.scrollTo(0, 0); // Scroll to the top of the page
+      setApiFetchType('bestRated');
+    }
+
+
+
+
+    const moviesData = await apiFetcher(null, pageNumber, null, null, true);
 
     if (pageNumber > 1) {
       setMovies([...movies, ...moviesData.results])
@@ -66,48 +143,78 @@ function App() {
       setMovies(moviesData.results);
     }
     setLoading(false);
-  };  
+  };
 
-  useEffect(() => {
-    fetchMoviesData();
-  }, []);
-  
+
+
 
   const handleSubmit = async (e) => {
-    setMovies([]);
-    setPageNumber(1);
     e.preventDefault();
-    fetchMoviesData(searchTerm);
+    console.log('\nHandler körs: Search')
+    setNavbarClickedToggler(!navbarClickedToggler);
+    setApiFetchType('search');
   };
 
-  const handleCategory = (e, category) => {
-    setMovies([]);
-    setPageNumber(1);
+  const handleLogoClick = async () => {
+    console.log('\nHandler körs: Search')
+    setNavbarClickedToggler(!navbarClickedToggler);
+    setApiFetchType('search');
+  }
+
+  const handleBestRatedClick = async () => {
+    console.log('\nHandler körs: best rated')
+    setNavbarClickedToggler(!navbarClickedToggler);
+    setApiFetchType('bestRated');
+  }
+
+  const handleCategory = async (e, category) => {
     e.preventDefault();
+    console.log('\nHandler körs: category')
     const categoryId = category.value; // extract the category value
-    fetchCategoriesData(categoryId);
+    const newCategoryId = (categoryId === categoryID);
+    setCategoryID(categoryId);
+
+    setNavbarClickedToggler(!navbarClickedToggler);
+    setApiFetchType('category');
+
   };
-  
-  
+
   //Scroll event listener 
   useEffect(() => {
-    const handelScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight * 0.9){
-        setPageNumber(pageNumber +1);
+    const debounce = (func, delay) => {
+      let timerId;
+      return function (...args) {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => func.apply(this, args), delay);
+      };
+    };
+
+    const handleScroll = debounce(() => {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight * 0.9) {
+        setPageNumber((prevPageNumber) => prevPageNumber + 1);
       }
-    }
-    window.addEventListener('scroll', handelScroll);
-  }, [pageNumber]); 
+    }, 150);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pageNumber]);
+
 
   return (
     <div>
       <Navbar
-      handleCategory={handleCategory}
-      handleSubmit={handleSubmit}
-      setSearchTerm={setSearchTerm}
-      apiFetcher={apiFetcher}
-      fetchMoviesData={fetchMoviesData}
-      fetchBestRatedData={fetchBestRatedData} />
+        handleCategory={handleCategory}
+        handleSubmit={handleSubmit}
+        setSearchTerm={setSearchTerm}
+        apiFetcher={apiFetcher}
+        fetchMoviesData={fetchMoviesData}
+        fetchBestRatedData={fetchBestRatedData}
+        handleLogoClick={handleLogoClick}
+        handleBestRatedClick={handleBestRatedClick}
+      />
       <Routes>
         <Route
           path="/"
@@ -115,7 +222,7 @@ function App() {
             <HomePageView
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
-              category={category}
+              category={categoryID}
               movies={movies}
               loading={loading}
               fetchMoviesData={fetchMoviesData}

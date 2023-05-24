@@ -1,4 +1,4 @@
-import { json, useLocation } from 'react-router-dom';
+import { json, useLocation, useNavigate } from 'react-router-dom';
 import Movie from '../Model/Movie';
 import './CSS/MovieInformationView.css';
 import apiFetcher from '../Components/apiFetcher';
@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from 'react';
 import Error404Message from '../Components/Error404Message';
 import CreateNewComment from '../Model/CreateNewComment';
 import DisplayComments from '../Model/DisplayComments';
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, query, where, onSnapshot, doc, setDoc, getDoc, addDoc, getDocs } from "firebase/firestore";
+import FirebaseConfig from '../Components/FireBaseConfig';
+
+import { collection, onSnapshot, addDoc } from "firebase/firestore";
 
 const MovieInformationView = () => {
     const location = useLocation();
@@ -17,18 +17,8 @@ const MovieInformationView = () => {
     const [movie, setMovie] = useState(location.state?.movie);
     const providedMovieId = location.pathname.split('/')[2];
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyAj9jcY-K4uZslJ1IMJYobgwWFRNYhEVTY",
-        authDomain: "webbshop-d762c.firebaseapp.com",
-        projectId: "webbshop-d762c",
-        storageBucket: "webbshop-d762c.appspot.com",
-        messagingSenderId: "701571660328",
-        appId: "1:701571660328:web:0cf4bf9b02bd7265ccd31d"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
+    const db = FirebaseConfig.getFirestoreInstance();
+    const navigate = useNavigate();
 
 
     const addCommentToDB = async (inputName, inputComment, providedMovieId) => {
@@ -91,8 +81,10 @@ const MovieInformationView = () => {
     const posterWidth = 500;
     if (movie?.title) {
         return (
-            <div>
+            <div className='MovieInfoPage'>
+                <i className="fa fa-arrow-circle-left backButton" onClick={() => {navigate(-1)}}></i>
                 <div className='MovieInfoViewContainer'>
+
                     <Movie
                         props={movie}
                         withAddButton={true}
@@ -102,17 +94,17 @@ const MovieInformationView = () => {
                     />
 
                 </div>
-                <hr/>
+                <hr />
                 <div className='movieCommentsContainer'>
-                    
-                <h3>User comments</h3>
+
+                    <h3>User comments</h3>
                     <div className='readCommentsContainer'>
                         {comments.map((comment, index) => (
 
                             <DisplayComments comment={comment} key={index} db={db} movieID={providedMovieId} />
                         ))}
                     </div>
-                  
+
                     <div className='newCommentContainer'>
                         <h3>Add a new comment</h3>
                         <CreateNewComment addCommentToDB={addCommentToDB} movieID={providedMovieId} />

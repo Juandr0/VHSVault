@@ -42,6 +42,10 @@ input[type=number]{
     height: 30px;
 }
 
+.cartAmountContainerNoBorder {
+    height: 30px;
+}
+
 .cartAmountContainer button {
     outline: none;
     background-color: transparent;
@@ -131,6 +135,14 @@ outline: none;
         margin-left: auto;
         
     }
+}
+
+@media (max-width: 312px) {
+.cartAmountContainer button {
+    font-size: 1em; 
+    padding: 2px 9px 5px 9px; 
+
+}
 }
 
 

@@ -1,4 +1,22 @@
+.movieInfoPage {
+    width: 100%;
+}
+
+
+.backButton {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    font-size: 3em;
+}
+
+.backButton:hover {
+    cursor: pointer;
+}
+
+
 .MovieInfoViewContainer {
+    justify-content: center;
     margin-top: 150px;
     display: flex;
     flex-wrap: wrap;
@@ -34,15 +52,16 @@
 
 @media (max-width: 487px) {
     .MovieInfoViewContainer {
-        margin: 150px 10px 10px 10px;
+        margin: 150px auto 10px;
+
     }
 
 
     .readCommentsContainer {
-        width: 100%;
+        width: 80%;
         background-color: #a12f36;
         padding: 10px;
-        margin: 10px;
+        margin: 10px auto;
         border-radius: 5px;
         overflow: auto;
         max-height: 700px;
@@ -53,10 +72,18 @@
         flex-wrap: wrap;
     }
 
- 
+
 
     .newCommentContainer {
         margin: 20px;
     }
-}
 
+    @media (max-width: 340px) {
+        .MovieInfoViewContainer {
+            width: 230px;
+
+        }
+
+
+    }
+}

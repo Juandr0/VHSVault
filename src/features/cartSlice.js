@@ -53,6 +53,7 @@ const cartSlice = createSlice({
         }
       });
       state.items = newState;
+      state.cartCount++;
     },
     decreaseAmount: (state, action) => {
       const newState = state.items.map((cartItem) => {
@@ -63,8 +64,11 @@ const cartSlice = createSlice({
         }
       });
       state.items = newState;
+      state.cartCount--;
     },
     removeFromCart: (state, action) => {
+      const currentItem = state.items.find((cartItem) => cartItem.title === action.payload);
+      state.cartCount = state.cartCount - currentItem.count;
       const newState = state.items.filter((cartItem) => cartItem.title !== action.payload);
       state.items = newState;
     },
